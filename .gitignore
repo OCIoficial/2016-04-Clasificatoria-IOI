@@ -1,4 +1,5 @@
 *.aux
+*.fls
 *.glo
 *.idx
 *.log
@@ -31,3 +32,4 @@ TAGS
 *.bin
 *.class
 checker
+*fdb_latexmk

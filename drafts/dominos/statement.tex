@@ -23,15 +23,23 @@ Para esto, tendrás que implementar algunas funciones que simplificarán enormem
 
 \section*{Tarea}
 
-Debes implementar la función \verb+validar+, que determina para un $n$ si es posible construir un cuadrado con un juego de $n-$dominós; no se pide que los lados sumen lo mismo, sólo se pide saber si se puede armar un cuadrado usando \emph{TODO} el juego de $n$-dominós.
+Debes implementar la función \verb+cuadrado+, que determina para un $n$ si es posible construir un cuadrado con un juego de $n-$dominós; no se pide que los lados sumen lo mismo, sólo se pide saber si se puede armar un cuadrado usando \emph{TODO} el juego de $n$-dominós.
+
+Además debes implementar la función \verb+validar+ que determina si un cuadrado cumple con la restricción de que todos los lados sumen lo mismo.
 
 Además, debes implementar la función \verb+construir+ que para $n$ y $k$ construye, si es posible, un cuadrado $(n,k)$, y retorna \verb+true+ si es posible o \verb+false+ si no.
 
 \begin{itemize}
- \item \verb+validar(n)+
+ \item \verb+cuadrado(n)+
  \begin{itemize}
   \item \verb+n+: el juego de $n$-dominós.
   \item \emph{return}: un booleano con valor \verb+true+ si se puede formar un cuadrado, y \verb+false+ si no.
+ \end{itemize}
+ \item \verb+validar(n, d)+
+ \begin{itemize}
+  \item \verb+n+: el juego de $n$-dominós.
+  \item \verb+d+: arreglo de $2f$ enteros, donde se guarda el orden de las fichas que forma el cuadrado.
+  \item \emph{return}: un booleano con valor \verb+true+ si se puede formar un cuadrado $(n,k)$, y \verb+false+ si no.
  \end{itemize}
 
  \item \verb+construir(n, k, d)+
@@ -44,10 +52,11 @@ Además, debes implementar la función \verb+construir+ que para $n$ y $k$ const
 
 \section*{Subtareas}
 \begin{itemize}
-  \item (a puntos) Implementar la función validar.
-  \item (b puntos) Implementar la función construir, con $n=7$.
-  \item (c puntos) Implementar la función construir, para $n \le 16$.
-  \item (d puntos) Implementar la función construir, para $n \le 1000$.
+  \item (a puntos) Implementar la función cuadrado.
+  \item (b puntos) Implementar la función validar.
+  \item (c puntos) Implementar la función construir, con $n=7$.
+  \item (d puntos) Implementar la función construir, para $n \le 16$.
+  \item (e puntos) Implementar la función construir, para $n \le 1000$.
 \end{itemize}
 
 %TODO detalles de implementación: todo es int
