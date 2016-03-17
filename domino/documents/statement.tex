@@ -1,31 +1,100 @@
 \documentclass{oci}
 \usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{subcaption}
 \usepackage{lipsum}
+\usepackage[spanish]{babel}
 
-\title{Ejemplo}
+\title{Dominó}
 
 \begin{document}
 \begin{problemDescription}
-\lipsum[1-3]
+Un juego completo de fichas de dominó consiste en un conjunto de piezas rectangulares de $2\times1$, divididas en dos cuadrados, donde cada mitad tiene un número entre 0 y $n-1$, donde habitualmente $n$ es 7.
+Llamaremos juego de $n$-dominós al juego de dominós con el valor correspondiente para $n$, por ejemplo un juego de $7$-dominós es aquél cuyas piezas tienen valores entre 0 y 6.
+Además, hay una pieza para cada combinación, y toda combinación aparece exactamente una vez (1--3 y 3--1 son la misma pieza).
+Por ejemplo, un juego completo de \textbf{7-dominós} consiste en \textbf{28 piezas}.
+
+Un juego de fichas de dominós es similar a una baraja de cartas, en cuanto a que ambos permiten jugar una gran variedad de juegos.
+Uno de estos es el del cuadrado.
+El juego\footnote{Inspirado en \emph{Matemáticas Recreativas} de Y. I. Perelman} consiste en formar, usando un juego \textbf{completo} de dominós, un cuadrado donde el número de piezas verticales y horizontales es el mismo (fig. \ref{f:cuadrados}), tal que para cada lado, la suma de los valores en él sea $k$.
+Está permitido poner juntos dos cuadrados de diferente valor (a diferencia del clásico juego de dominó).
+Llamaremos a este cuadrado el cuadrado $(n,k)$.
+
+Por supuesto, no es posible completar este juego para todos los $n$ ni, dado $n$, para todos los $k$.
+Por ejemplo, si $n$ es 2, el juego completo de $2$-dominós tiene 3 piezas (0--0, 0--1 y 1--1) y no es posible armar un cuadrado; si $n$ es 7 y $k$ es 90, la suma de los lados será siempre menor que 90 por lo que no existe el cuadrado $(7,90)$.
+
+\begin{figure}[!h]
+ \centering
+ \begin{subfigure}[b]{0.45\textwidth}
+  \centering
+  \input{domino1}
+  \caption{Cuadrado inválido}
+  \label{f:invalido}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.45\textwidth}
+  \centering
+  \input{domino2}
+  \caption{Cuadrado de lado 5}
+  \label{f:valido}
+ \end{subfigure}
+ \caption{Un cuadrado válido y uno inválido.}
+ \label{f:cuadrados}
+\end{figure}
+
+Tu objetivo es, entonces, determinar una configuración de piezas para completar el cuadrado $(n,k)$.
+Para esto, tendrás que implementar algunas funciones que simplificarán enormemente la resolución del problema.
+
+\begin{figure}[ht]
+ \centering
+ \input{domino3}
+ \caption{Un cuadrado $(7,45)$. Notar que cada lado suma 45.}
+ \label{f:cuadrado7}
+\end{figure}
+
 \end{problemDescription}
 
-\begin{inputDescription}
-\lipsum[1]
-\end{inputDescription}
+\subsection*{Tarea}
 
-\begin{outputDescription}
-\lipsum[1]
-\end{outputDescription}
+Debes implementar la función \verb+cuadrado+, que determina para un $n$ si es posible construir un cuadrado con un juego de $n-$dominós; no se pide que los lados sumen lo mismo, sólo se pide saber si se puede armar un cuadrado como el de la figura \ref{f:valido} usando \textbf{todo} el juego de $n$-dominós.
+
+Además debes implementar la función \verb+validar+ que determina si un cuadrado cumple con la restricción de que todos los lados sumen lo mismo.
+
+Por último, debes implementar la función \verb+construir+ que para $n$ y $k$ construye, si es posible, un cuadrado $(n,k)$, y retorna \verb+true+ si es posible o \verb+false+ si no.
+
+\begin{itemize}
+ \item \verb+cuadrado(n)+
+ \begin{itemize}
+  \item \verb+n+: el juego de $n$-dominós.
+  \item \emph{return}: un booleano con valor \verb+true+ si se puede formar un cuadrado, y \verb+false+ si no.
+ \end{itemize}
+ \item \verb+validar(n, d)+
+ \begin{itemize}
+  \item \verb+n+: el juego de $n$-dominós.
+  \item \verb+d+: arreglo de $2f$ enteros, donde se guarda el orden de las fichas que forma el cuadrado.
+  \item \emph{return}: un booleano con valor \verb+true+ si los cuatro lados suman lo mismo, y \verb+false+ si no.
+ \end{itemize}
+
+ \item \verb+construir(n, k, d)+
+ \begin{itemize}
+  \item \verb+n, k+: valores para $n,k$, que indican el cuadrado $(n,k)$ que se quiere construir.
+  \item \verb+d+: arreglo de $2f$ enteros, donde usted debe guardar los valores de las fichas de un cuadrado $(n,k)$, partiendo desde alguna esquina. Observa que $f$ es el número de piezas de dominó.
+  \item \emph{return}: un booleano con valor \verb+true+ si se puede formar un cuadrado $(n,k)$, y \verb+false+ si no.
+ \end{itemize}
+\end{itemize}
+
+\paragraph{Convención sobre el formato del arreglo \emph{d}}
+Para las funciones \verb+validar+ y \verb+construir+, respectivamente al revisar y llenar el arreglo \verb+d+, considera siempre que la posición 0 es una esquina, y que el resto se enumera en un sentido tal que los pares de valores de una misma ficha siempre quedan en posiciones adyacentes en el arreglo. El orden es fundamental para que los códigos puedan ser evaluados correctamente.
+
+Por ejemplo, la figura \ref{f:cuadrado7} puede ser guardada en el arreglo de la siguiente manera (partiendo de la esquina superior izquierda):
+
+$$ 6, 2, 0, 4, 5, 1, 4, 6, 3, 1, 1, 0, 4, 5, 3, 4, 0, 0, \dots, 1, 4, 5, 5, 2, 3, 3, 0, 0, 6, 0, 2, 6, 5, 2, 2, 5, 3 $$
 
 \begin{scoreDescription}
-  \score{10} Restricciones Subtarea1
-  \score{10} Restricciones Subtarea2
-  \score{10} Restricciones Subtarea3
+  \score{25} Implementar la función cuadrado, para $n \le 1000$.
+  \score{20} Implementar la función validar, para $n \le 1000$.
+  \score{10} Implementar la función construir, con $n=7$.
+  \score{20} Implementar la función construir, para $n \le 16$.
+  \score{25} Implementar la función construir, para $n \le 1000$.
 \end{scoreDescription}
-
-\begin{sampleDescription}
-\sampleIO{sample1}
-\sampleIO{sample1}
-\end{sampleDescription}
 
 \end{document}
