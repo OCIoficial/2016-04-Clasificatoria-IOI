@@ -2,29 +2,129 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lipsum}
 
-\title{Ejemplo}
+% \usepackage{icpc_problem} % or wherever this package is stored
+\usepackage[english]{babel}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikz/]
+\usepackage{wrapfig}
+
+\def\NN{\mathbb{N}}
+\def\ZZ{\mathbb{Z}}
+\def\prob{\mathbb{P}}
+\def\esp{\mathbb{E}}
+\def\ag{\mathcal{A}}
+\def\CC{\mathcal{C}}
+
+\title{Camino del drag\'on}
 
 \begin{document}
 \begin{problemDescription}
-\lipsum[1-3]
-\end{problemDescription}
+Nuestro h\'eroe Olon-sonk\'u debe recorrer el camino del drag\'on para llegar al planeta de Jorgesama y aumentar su poder de pelea. Desgraciadamente el camino del drag\'on no es una l\'inea recta, sino que es un camino fractal conocido como la curva del drag\'on de Highway.
+
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+	\begin{center}
+			\include{dragoncito}
+		Primeros $2^{12}-1$ pasos de la curva del drag\'on
+	\end{center}
+\end{wrapfigure}
+
+Si bien nuestro amigo Olon-sonk\'u tiene una gran fuerza f\'isica, su inteligencia no se equipara y tiene problemas para realizar hasta el m\'as simple de los c\'alculos artim\'eticos. Para lograr su cometido debe lograr calcular las coordenadas del planeta del gran Jorgesama lo cual le resulta muy complicado. Por fortuna su amiga Bulnelman planea ayudarlo a realizar esta tarea.
+
+Bulnelman estudia el camino del drag\'on y descubre que este puede ser descrito de manera muy simple de la siguiente forma:
+
+Supongamos que Olon-sonk\'u comienza en la posici\'on $(0,0)$ mirando al norte. El camino del Drag\'on se describe de la siguiente forma: Denotemos por $A$ la acci\'on de avanzar un paso, $R$ rotar $90^{\circ}$ a la derecha y $L$ rotar $90^{\circ}$ a la izquierda. Consideremos el sistema de reescritura siguiente donde cada letra $a,b$ se reemplaza por la cadena de caracteres de la derecha.
+
+$$a \rightarrow aRbAR \ \ \ \ \ \ \ \ \ \   b \rightarrow LAaLb$$
+
+
+Por ejemplo, si comenzamos con la cadena $a$ y aplicamos las reglas dos veces obtendremos:
+
+$$a \rightarrow aRbAR \rightarrow aRbARRLAaLbAR $$
+
+El camino del drag\'on est\'a determinado por la secuencia de instrucciones obtenidas al repetir las reglas de escritura iterativamente comenzando en $Aa$ e ignorar posteriormente las apariciones de $a$ y $b$. Por ejemplo, si consideramos las primeras tres iteraciones comenzando desde $Aa$ obtenemos la cadena $$AaRbARRLAaLbARRLAaRbARLLAaLbAR.$$
+
+Eliminando las apariciones de $a$ y $b$ nos queda:
+
+$$ARARRLALARRLARARLLALAR$$
+
+Si seguimos las instrucciones obtenemos el siguiente camino.
+% \newpage
+\begin{itemize}
+	{\footnotesize \item Comenzar en $(0,0)$ mirando al norte
+	\item $A$:  Llega a $(0,1)$ y mira al norte.
+	\item $RA$: Rotar a la derecha y avanzar, llega a $(1,1)$ y mira al este.
+	\item $RRLA$: Rotar dos veces a la derecha y una a la izquierda y avanzar, llega a $(1,0)$ y mira al sur.
+	\item $LA$: Llega a $(2,0)$ y mira al este.
+	\item $RRLA$: Llega a $(2,-1)$ y mira al sur.
+	\item $RA$: Llega a $(1,-1)$ y mira al oeste.
+	\item $RLLA$: Llega a $(1,-2)$ y mira al sur.
+	\item $LAR$:  Termina en $(2,-2)$ mirando al sur.}
+\end{itemize}
+
+\begin{figure}[h]
+\begin{center}
+		\begin{tikzpicture}
+	\begin{scope}[scale = 0.6, shift={(-15,0)},rotate=0]
+	\draw[thick,red] (0,0) --(0,1);
+	\draw[fill = black] (0,0) circle (0.1);
+	\end{scope}
+	\begin{scope}[scale = 0.6, shift={(-12,0)},rotate=0]
+	\draw[thick,red] (0,0) --(0,1) --(1,1);
+	\draw[fill = black] (0,0) circle (0.1);
+	\end{scope}
+	\begin{scope}[scale = 0.6, shift={(-9,0)},rotate=0]
+	\draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0);
+	\draw[fill = black] (0,0) circle (0.1);
+	\end{scope}
+	\begin{scope}[scale = 0.6, shift={(-6,0)},rotate=0]
+	\draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0);
+	\draw[fill = black] (0,0) circle (0.1);
+	\end{scope}
+	\begin{scope}[scale = 0.6, shift={(-3,0)},rotate=0]
+	\draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1);
+	\draw[fill = black] (0,0) circle (0.1);
+	\end{scope}
+	\begin{scope}[scale = 0.6, shift={(0,0)},rotate=0]
+	\draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1);
+	\draw[fill = black] (0,0) circle (0.1);
+	\end{scope}
+	\begin{scope}[scale = 0.6, shift={(3,0)},rotate=0]
+	\draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1)--(1,-2);
+	\draw[fill = black] (0,0) circle (0.1);
+	\end{scope}
+	\begin{scope}[scale = 0.6, shift={(6,0)},rotate=0]
+	\draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1)--(1,-2) -- (2,-2);
+	\draw[fill = black] (0,0) circle (0.1);
+	\end{scope}
+	\end{tikzpicture}
+	
+	Primeros $8$ pasos del camino del drag\'on descritos en $3$ iteraciones.
+\end{center}
+\end{figure}
+
+Digamos que el camino tiene largo $n$ si se ejecuta la acci\'on avanzar $n$ veces. Por ejemplo, el camino descrito anteriormente tiene largo $n = 8$. Supongamos que Bulnelman sabe que la casa de el gran Jorgesama se encuentra al final del camino del drag\'on que tiene largo $n$. ?`Puedes ayudarnos a saber cual es la posici\'on exacta de la casa del gran Jorgesama?\end{problemDescription}
 
 \begin{inputDescription}
-\lipsum[1]
+El input consiste en una linea que contiene un entero positivo $n$ describiendo el largo del camino del drag\'on
 \end{inputDescription}
 
 \begin{outputDescription}
-\lipsum[1]
+El output consiste en una l\'inea que contiene dos enteros $x$ e $y$ separados por un espacio determinando las coordenadas de la casa del gran Jorgesama.
 \end{outputDescription}
 
 \begin{scoreDescription}
-  \score{10} Restricciones Subtarea1
-  \score{10} Restricciones Subtarea2
-  \score{10} Restricciones Subtarea3
+\score{10} Se probar\'an varios casos en donde $1 \leq n \leq 8$.
+\score{20} Se probar\'an varios casos en donde $1 \leq n \leq 100$.
+\score{20} Se probar\'an varios casos en donde $1 \leq n \leq 10^5$.
+\score{50} Se probar\'an varios casos donde $1 \leq n \leq 10^{15}$. 
 \end{scoreDescription}
 
 \begin{sampleDescription}
-\sampleIO{sample1}
 \sampleIO{sample1}
 \end{sampleDescription}
 
