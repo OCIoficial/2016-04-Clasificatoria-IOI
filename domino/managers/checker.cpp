@@ -5,6 +5,12 @@
 
 using namespace std;
 
+bool fn_cuadrado(int n);
+bool fn_validar(int n, vector<int> &d);
+int fn_fichas(int n);
+int fn_sum(int n, int f, vector<int> &d);
+bool eval_construir(int n, int k, int f, vector<int> &d);
+
 int wrong_ans() {
 	cout << "0.0\n";
 	return 0;
@@ -46,8 +52,9 @@ int main (int argc, char *argv[]) {
 	
 	fcorr.close();	// Unused
 	
-	int t, n, ld;
-	bool ans;
+	int t, n, k, f, ld;
+	bool ans, feasible;
+	vector<int> d;
 	
 	fin >> t;
 	
@@ -55,30 +62,28 @@ int main (int argc, char *argv[]) {
 	case 1:
 		fin >> n;
 		ftest >> ans;
-		ans == fn_cuadrado(n) ? right_ans() : wrong_ans();
-		//return 0;
+		return ans == fn_cuadrado(n) ? right_ans() : wrong_ans();
 		
 	case 2:
 		fin >> n >> ld;
-		vector<int> d(ld);
+		d.resize(ld);
 		for (int i = 0; i < ld; i++)
 			fin >> d[i];
 		ftest >> ans;
-		(ans == fn_validar(n, d)) ? right_ans() : wrong_ans();
-		//return 0;
+		return ans == fn_validar(n, d) ? right_ans() : wrong_ans();
 		
 	case 3:
 		fin >> n >> k >> ld;
-		vector<int> d(ld);
+		d.resize(ld);
 		ftest >> ans;
 		for (int i = 0; i < ld; i++)
 			ftest >> d[i];
-		int f = fn_fichas(n);
-		bool feasible = fn_cuadrado(n) && k >= f * (n-1) && k <= (f+4) * (n-1);
+		f = fn_fichas(n);
+		feasible = fn_cuadrado(n) && k >= f * (n-1) && k <= (f+4) * (n-1);
 		if (ans != feasible)
 			wrong_ans();
-		eval_construir(n, k, f, d) ? right_ans() : wrong_ans();
-		//return 0;
+		return eval_construir(n, k, f, d) ? right_ans() : wrong_ans();
+		
 	default:
 		return 1;
 	}
@@ -88,7 +93,7 @@ bool fn_cuadrado(int n) {
 	return (n-1) % 8 >= 6;
 }
 
-bool fn_validar(int n, vector<int> d) {
+bool fn_validar(int n, vector<int> &d) {
 	if (!fn_cuadrado(n))
 		return false;
 	
@@ -120,7 +125,7 @@ int fn_fichas(int n) {
 	return n * (n + 1) / 2;
 }
 
-int fn_sum(int n, int f, vector<int> d) {
+int fn_sum(int n, int f, vector<int> &d) {
 	int side;
 	for (int i = 0; i < 4; i++) {
 		int curr = 0;
@@ -136,10 +141,7 @@ int fn_sum(int n, int f, vector<int> d) {
 	return side;
 }
 
-/* Checks if bool construir(int n, int k, vector<int> d) correctly verified if
- * an (n,k)-square is feasible and verifies if the built one is correct.
- */
-bool eval_construir(int n, int k, int f, vector<int> d) {
+bool eval_construir(int n, int k, int f, vector<int> &d) {
 	if (!fn_validar(n, d) || k != fn_sum(n, f, d)) {
 		return false;
 	}

@@ -59,6 +59,7 @@ Debes implementar la función \verb+cuadrado+, que determina para un $n$ si es p
 
 Además debes implementar la función \verb+validar+ que determina si un cuadrado cumple con la restricción de que todos los lados sumen lo mismo.
 Esto también implica verificar que las fichas correspondan a las del juego completo de $n$-dominó.
+Sin embargo, puedes asumir que el juego completo de $n-$dominó sí permite formar un cuadrado.
 
 Por último, debes implementar la función \verb+construir+ que para $n$ y $k$ construye, si es posible, un cuadrado $(n,k)$, y retorna \verb+true+ si es posible o \verb+false+ si no.
 
@@ -71,14 +72,14 @@ Por último, debes implementar la función \verb+construir+ que para $n$ y $k$ c
  \item \verb+validar(n, d)+
  \begin{itemize}
   \item \verb+n+: el juego de $n$-dominó.
-  \item \verb+d+: arreglo de $2f$ enteros, donde se guarda el orden de las fichas que forma el cuadrado.
+  \item \verb+d+: vector de $2f$ enteros, donde se guarda el orden de las fichas que forma el cuadrado.
   \item \emph{return}: un booleano con valor \verb+true+ si los cuatro lados suman lo mismo, y \verb+false+ si no.
  \end{itemize}
 
  \item \verb+construir(n, k, d)+
  \begin{itemize}
   \item \verb+n, k+: valores para $n,k$, que indican el cuadrado $(n,k)$ que se quiere construir.
-  \item \verb+d+: arreglo de $2f$ enteros, donde usted debe guardar los valores de las fichas de un cuadrado $(n,k)$, partiendo desde alguna esquina. Observa que $f$ es el número de piezas de dominó.
+  \item \verb+d+: vector de $2f$ enteros, donde usted debe guardar los valores de las fichas de un cuadrado $(n,k)$, partiendo desde alguna esquina. Observa que $f$ es el número de piezas de dominó.
   \item \emph{return}: un booleano con valor \verb+true+ si se puede formar un cuadrado $(n,k)$, y \verb+false+ si no.
  \end{itemize}
 \end{itemize}
