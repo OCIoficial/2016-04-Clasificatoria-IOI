@@ -1,15 +1,16 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <vector>
 
 
 using namespace std;
 
 bool fn_cuadrado(int n);
-bool fn_validar(int n, vector<int> &d);
+bool fn_validar(int n, int d[]);
 int fn_fichas(int n);
-int fn_sum(int n, int f, vector<int> &d);
-bool eval_construir(int n, int k, int f, vector<int> &d);
+int fn_sum(int n, int f, int d[]);
+bool eval_construir(int n, int k, int f, int d[]);
 
 int wrong_ans() {
 	cout << "0.0\n";
@@ -53,36 +54,55 @@ int main (int argc, char *argv[]) {
 	fcorr.close();	// Unused
 	
 	int t, n, k, f, ld;
+	string raw_ans;
 	bool ans, feasible;
-	vector<int> d;
+	int *d;
 	
 	fin >> t;
 	
 	switch (t) {
 	case 1:
 		fin >> n;
-		ftest >> ans;
+		ftest >> raw_ans;
+		if (raw_ans == "true")
+			ans = true;
+		else if (raw_ans == "false")
+			ans = false;
+		else
+			return wrong_ans();
 		return ans == fn_cuadrado(n) ? right_ans() : wrong_ans();
 		
 	case 2:
 		fin >> n >> ld;
-		d.resize(ld);
+		d = new int[ld];
 		for (int i = 0; i < ld; i++)
 			fin >> d[i];
-		ftest >> ans;
+		ftest >> raw_ans;
+		if (raw_ans == "true")
+			ans = true;
+		else if (raw_ans == "false")
+			ans = false;
+		else
+			return wrong_ans();
 		return ans == fn_validar(n, d) ? right_ans() : wrong_ans();
 		
 	case 3:
 		fin >> n >> k >> ld;
-		d.resize(ld);
-		ftest >> ans;
+		d = new int[ld];
+		ftest >> raw_ans;
+		if (raw_ans == "true")
+			ans = true;
+		else if (raw_ans == "false")
+			ans = false;
+		else
+			return wrong_ans();
 		for (int i = 0; i < ld; i++)
 			ftest >> d[i];
 		f = fn_fichas(n);
-		feasible = fn_cuadrado(n) && k >= f * (n-1) && k <= (f+4) * (n-1);
+		feasible = fn_cuadrado(n) && k >= f / 4 * (n-1) && k <= (f / 4 + 1) * (n-1);
 		if (ans != feasible)
-			wrong_ans();
-		return eval_construir(n, k, f, d) ? right_ans() : wrong_ans();
+			return wrong_ans();
+		return !feasible || eval_construir(n, k, f, d) ? right_ans() : wrong_ans();
 		
 	default:
 		return 1;
@@ -93,7 +113,7 @@ bool fn_cuadrado(int n) {
 	return (n-1) % 8 >= 6;
 }
 
-bool fn_validar(int n, vector<int> &d) {
+bool fn_validar(int n, int d[]) {
 	if (!fn_cuadrado(n))
 		return false;
 	
@@ -125,7 +145,7 @@ int fn_fichas(int n) {
 	return n * (n + 1) / 2;
 }
 
-int fn_sum(int n, int f, vector<int> &d) {
+int fn_sum(int n, int f, int d[]) {
 	int side;
 	for (int i = 0; i < 4; i++) {
 		int curr = 0;
@@ -141,7 +161,7 @@ int fn_sum(int n, int f, vector<int> &d) {
 	return side;
 }
 
-bool eval_construir(int n, int k, int f, vector<int> &d) {
+bool eval_construir(int n, int k, int f, int d[]) {
 	if (!fn_validar(n, d) || k != fn_sum(n, f, d)) {
 		return false;
 	}

@@ -46,7 +46,7 @@ bool validar(int n, int d[]) {
 bool construir(int n, int k, int d[]) {
 	int f = fichas(n);
 	int p = f / 2;
-	if (!cuadrado(n) || k < f / 4 * (n - 1) || k > (f / 4 + 1) * (n - 1))
+	if (!cuadrado(n) || k < f / 4 * (n - 1) || k > (f / 4 + 4) * (n - 1))
 		return false;
 	
 	// Valor promedio de las esquinas
