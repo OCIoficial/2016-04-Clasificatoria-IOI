@@ -1,0 +1,44 @@
+\documentclass{oci}
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+
+\title{La Gran Fila}
+
+\begin{document}
+\maketitle
+
+Cada cuatro años la Organización de Cine Independiente (OCI) destina un día para que sus integrantes puedan devolver las películas que han arrendado.
+Como esta instancia se organiza solo cada cuatro años la fila que se arma es extremadamente larga.
+Es por esto que las personas en la fila deben esperar horas hasta poder ser atendidos.
+
+La fila esta conformada por $N$ personas numeradas de 1 a $N$.
+Dependiendo de la cantidad de películas que tiene que devolver, cada persona tardará más o menos tiempo en ser atendida.
+Esta información es conocida de antemano.
+El tiempo que una persona debe esperar en la fila es igual a la suma de los tiempos de todas las personas delante de ella.
+
+Este año toda la gente ha llegado muy temprano y se encuentra formada en una gran fila fuera de las dependencias de la OCI.
+Antes de abrir las puertas un trabajador de la OCI anuncia que este año será posible atender a los asistentes en dos filas y por lo tanto es necesario formar una nueva.
+Para evitar conflictos, el trabajador propone que en el mismo orden en que están formados cada persona elija si quedarse en la fila actual o cambiarse al final de la nueva fila.
+
+
+
+\begin{inputDescription}
+\lipsum[1]
+\end{inputDescription}
+
+\begin{outputDescription}
+\lipsum[1]
+\end{outputDescription}
+
+\begin{scoreDescription}
+  \score{10} Restricciones Subtarea1
+  \score{10} Restricciones Subtarea2
+  \score{10} Restricciones Subtarea3
+\end{scoreDescription}
+
+\begin{sampleDescription}
+\sampleIO{sample1}
+\sampleIO{sample1}
+\end{sampleDescription}
+
+\end{document}

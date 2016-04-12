@@ -22,110 +22,147 @@
 \title{Camino del drag\'on}
 
 \begin{document}
-\begin{problemDescription}
-Nuestro h\'eroe Olon-sonk\'u debe recorrer el camino del drag\'on para llegar al planeta de Jorgesama y aumentar su poder de pelea. Desgraciadamente el camino del drag\'on no es una l\'inea recta, sino que es un camino fractal conocido como la curva del drag\'on de Highway.
+\maketitle
+Nuestro héroe Olon-sonkú debe recorrer el camino del dragón para llegar al planeta de Jorgesama y aumentar su poder de pelea. Desgraciadamente, el camino del dragón no es en línea recta, sino que es un camino fractal conocido como la curva del dragón de Highway.
 
 
 \begin{wrapfigure}{r}{0.5\textwidth}
 	\begin{center}
 			\include{dragoncito}
-		Primeros $2^{12}-1$ pasos de la curva del drag\'on
+		Primeros $2^{12}-1$ pasos de la curva del dragón
 	\end{center}
 \end{wrapfigure}
 
-Si bien nuestro amigo Olon-sonk\'u tiene una gran fuerza f\'isica, su inteligencia no se equipara y tiene problemas para realizar hasta el m\'as simple de los c\'alculos artim\'eticos. Para lograr su cometido debe lograr calcular las coordenadas del planeta del gran Jorgesama lo cual le resulta muy complicado. Por fortuna su amiga Bulnelman planea ayudarlo a realizar esta tarea.
+Si bien nuestro amigo Olon-sonkú tiene una gran fuerza física, su inteligencia es bastante escasa.
+Incluso los cálculos más simples de aritmética son un gran desafío para Olon-sonkú.
+En este caso se encuentra en un gran problema pues para lograr su cometido debe calcular las coordenadas del planeta del gran Jorgesama que se encuentra siempre al final del camino del dragón.
+Por fortuna su amiga Bulnelman planea ayudarlo a realizar esta tarea.
 
-Bulnelman estudia el camino del drag\'on y descubre que este puede ser descrito de manera muy simple de la siguiente forma:
+Bulnelman estudió detenidamente el camino del dragón y descubrió que este puede ser descrito de manera muy simple.
+Para describir el camino del dragón se denotará con una $A$ la acción de avanzar un paso, con una $R$ la acción de rotar $90^{\circ}$ grados a la derecha y con una $L$ la acción de rotar $90^{\circ}$ a la izquierda.
+Un camino del dragón es representado por una secuencia formada por estas letras que determina cuales son las acciones que hay que realizar para recorrer el camino.
+No obstante, no cualquier secuencia formada con estas letras corresponde a un camino del dragón válido.
+Las secuencias válidas son generadas por un sistema de reescritura.
+Llamaremos secuencias del dragón a las secuencias que corresponden a un camino del dragón válido.
 
-Supongamos que Olon-sonk\'u comienza en la posici\'on $(0,0)$ mirando al norte. El camino del Drag\'on se describe de la siguiente forma: Denotemos por $A$ la acci\'on de avanzar un paso, $R$ rotar $90^{\circ}$ a la derecha y $L$ rotar $90^{\circ}$ a la izquierda. Consideremos el sistema de reescritura siguiente donde cada letra $a,b$ se reemplaza por la cadena de caracteres de la derecha.
-
+Un sistema de reescritura consiste en una serie de reglas para transformar una secuencia.
+Cada regla contiene un símbolo a la izquierda y una secuencia a la derecha.
+Aplicar una regla significa que cada aparición del símbolo de la izquierda debe ser reemplazado por la secuencia de la derecha.
+Las reglas para generar secuencias que representen un camino del dragón válido usan dos símbolos auxiliares $a$ y $b$.
+Estos símbolos no representan acciones y solo son usados para generar las secuencias.
+Las reglas correspondientes al camino del dragón son las siguientes.
 $$a \rightarrow aRbAR \ \ \ \ \ \ \ \ \ \   b \rightarrow LAaLb$$
+Para generar secuencias válidas para un camino del dragón hay que partir con la secuencia $Aa$ y aplicar iterativamente estas reglas de reescritura.
+A continuación se muestra la aplicación de las reglas en tres iteraciones consecutivas.
+En cada paso ambas reglas son aplicadas simultáneamente.
+$$Aa \rightarrow AaRbAR \rightarrow AaRbARRLAaLbAR \rightarrow AaRbARRLAaLbARRLAaRbARLLAaLbAR$$
+En el primer paso el símbolo $a$ es reemplazado en $Aa$ por la secuencia $aRbAR$ resultando $AaRbAR$.
+A continuación se reemplaza simultáneamente la $a$ por $aRbAR$ y la $b$ por $LAaLB$ dando como resultado la secuencia $AaRbARRLAaLbAR$.
+Finalmente después de la tercera iteración se obtiene la secuencia $AaRbARRLAaLbARRLAaRbARLLAaLbAR$.
 
+Cada una de las secuencias generadas en el proceso da origen a una secuencia del dragón que corresponde a la secuencia generada eliminando las ocurrencias de $a$ y $b$.
+Por ejemplo las secuencias $ARAR$, $ARARRLALAR$ y $ARARRLALARRLARARLLALAR$ son las secuencias del dragón originadas a partir de las secuencias generadas en las primeras tres iteraciones.
 
-Por ejemplo, si comenzamos con la cadena $a$ y aplicamos las reglas dos veces obtendremos:
-
-$$a \rightarrow aRbAR \rightarrow aRbARRLAaLbAR $$
-
-El camino del drag\'on est\'a determinado por la secuencia de instrucciones obtenidas al repetir las reglas de escritura iterativamente comenzando en $Aa$ e ignorar posteriormente las apariciones de $a$ y $b$. Por ejemplo, si consideramos las primeras tres iteraciones comenzando desde $Aa$ obtenemos la cadena $$AaRbARRLAaLbARRLAaRbARLLAaLbAR.$$
-
-Eliminando las apariciones de $a$ y $b$ nos queda:
-
-$$ARARRLALARRLARARLLALAR$$
-
-Si seguimos las instrucciones obtenemos el siguiente camino.
+Para calcular el final del camino para una secuencia del dragón hay que ejecutar las acciones especificadas en ella.
+Para esto supondremos que Olon-sonkú siempre comienza en la posición $(0,0)$ mirando hacia el norte.
+A continuación se muestra un ejemplo donde se ejecutan las acciones para la secuencia $ARARRLALARRLARARLLALAR$ junto a una figura:
 % \newpage
+\\
+
+\begin{minipage}{0.45\textwidth}
 \begin{itemize}
 	{\footnotesize \item Comenzar en $(0,0)$ mirando al norte
-	\item $A$:  Llega a $(0,1)$ y mira al norte.
-	\item $RA$: Rotar a la derecha y avanzar, llega a $(1,1)$ y mira al este.
-	\item $RRLA$: Rotar dos veces a la derecha y una a la izquierda y avanzar, llega a $(1,0)$ y mira al sur.
-	\item $LA$: Llega a $(2,0)$ y mira al este.
-	\item $RRLA$: Llega a $(2,-1)$ y mira al sur.
-	\item $RA$: Llega a $(1,-1)$ y mira al oeste.
-	\item $RLLA$: Llega a $(1,-2)$ y mira al sur.
-	\item $LAR$:  Termina en $(2,-2)$ mirando al sur.}
+	\item $A$:  Avanzar, llega a $(0,1)$ mirando todavía hacia el norte.
+	\item $RA$: Rotar a la derecha y avanzar, llega a $(1,1)$ y mirando hacia el este.
+	\item $RRLA$: Rotar dos veces a la derecha, una vez a la izquierda y luego avanzar, llega a $(1,0)$ y mirando hacia sur.
+	\item $LA$: Llega a $(2,0)$ mirando hacia el este.
+	\item $RRLA$: Llega a $(2,-1)$ mirando hacia el sur.
+	\item $RA$: Llega a $(1,-1)$ mirando hacia el oeste.
+	\item $RLLA$: Llega a $(1,-2)$ mirando hacia el sur.
+	\item $LAR$:  Termina en $(2,-2)$ mirando hacia el sur.}
 \end{itemize}
-
-\begin{figure}[h]
+\end{minipage}
+~%
+\begin{minipage}{0.5\textwidth}
 \begin{center}
 		\begin{tikzpicture}
-	\begin{scope}[scale = 0.6, shift={(-15,0)},rotate=0]
-	\draw[thick,red] (0,0) --(0,1);
-	\draw[fill = black] (0,0) circle (0.1);
-	\end{scope}
-	\begin{scope}[scale = 0.6, shift={(-12,0)},rotate=0]
-	\draw[thick,red] (0,0) --(0,1) --(1,1);
-	\draw[fill = black] (0,0) circle (0.1);
-	\end{scope}
-	\begin{scope}[scale = 0.6, shift={(-9,0)},rotate=0]
-	\draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0);
-	\draw[fill = black] (0,0) circle (0.1);
-	\end{scope}
-	\begin{scope}[scale = 0.6, shift={(-6,0)},rotate=0]
-	\draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0);
-	\draw[fill = black] (0,0) circle (0.1);
-	\end{scope}
-	\begin{scope}[scale = 0.6, shift={(-3,0)},rotate=0]
-	\draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1);
-	\draw[fill = black] (0,0) circle (0.1);
-	\end{scope}
-	\begin{scope}[scale = 0.6, shift={(0,0)},rotate=0]
-	\draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1);
-	\draw[fill = black] (0,0) circle (0.1);
-	\end{scope}
-	\begin{scope}[scale = 0.6, shift={(3,0)},rotate=0]
-	\draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1)--(1,-2);
-	\draw[fill = black] (0,0) circle (0.1);
-	\end{scope}
-	\begin{scope}[scale = 0.6, shift={(6,0)},rotate=0]
-	\draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1)--(1,-2) -- (2,-2);
-	\draw[fill = black] (0,0) circle (0.1);
+	% \begin{scope}[scale = 0.6, shift={(-15,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 0.6, shift={(-12,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1) --(1,1);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 0.6, shift={(-9,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 0.6, shift={(-6,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 0.6, shift={(-3,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 0.6, shift={(0,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 0.6, shift={(3,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1)--(1,-2);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 1, shift={(0,0)},rotate=0]
+    \draw[step=1, lightgray, very thin] (2.5,2.5) grid (-2.5,-2.5);
+    \foreach \i in {-2,-1,1,2}
+       \draw (\i, -1pt) -- (\i, 1pt) node[anchor=north, scale=0.7]{$\i$};
+    \foreach \i in {-2,-1,1,2}
+       \draw (-1pt,\i) -- (1pt,\i) node[anchor=east, scale=0.7]{$\i$};
+  \draw[thin] (0,-2.5) -- (0,2.5);
+  \draw[thin] (-2.5,0) -- (2.5, 0);
+	\draw[very thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1)--(1,-2) -- (2,-2);
+	% \draw[fill = black] (0,0) circle (0.1);
 	\end{scope}
 	\end{tikzpicture}
-	
-	Primeros $8$ pasos del camino del drag\'on descritos en $3$ iteraciones.
 \end{center}
-\end{figure}
+\end{minipage}
+\\
 
-Digamos que el camino tiene largo $n$ si se ejecuta la acci\'on avanzar $n$ veces. Por ejemplo, el camino descrito anteriormente tiene largo $n = 8$. Supongamos que Bulnelman sabe que la casa de el gran Jorgesama se encuentra al final del camino del drag\'on que tiene largo $n$. ?`Puedes ayudarnos a saber cual es la posici\'on exacta de la casa del gran Jorgesama?\end{problemDescription}
+Diremos que el camino tiene largo $N$ si se ejecuta la acción avanzar $N$ veces.
+Por ejemplo, el camino descrito anteriormente tiene largo $N = 8$.
+Notar que en cada iteración de la generación de las secuencias se agregan acciones de avanzar.
+Por ejemplo, no hay ningún camino del dragón con 
+Supón que Bulnelman sabe que el planeta de Jorgesama se encuentra al final del camino de un camino del dragón de largo $N$.
+?`Puedes ayudarnos a saber cual es la posición exacta dela planeta del gran Jorgesama?
+
 
 \begin{inputDescription}
-El input consiste en una linea que contiene un entero positivo $n$ describiendo el largo del camino del drag\'on
+La entrada consiste en una linea con un único entero positivo $N$.
+Tu programa debe calcular las coordenadas del final del camino del dragón de largo $N$.
+El valor de $N$ siempre será un largo válido para un camino del dragón.
 \end{inputDescription}
 
 \begin{outputDescription}
-El output consiste en una l\'inea que contiene dos enteros $x$ e $y$ separados por un espacio determinando las coordenadas de la casa del gran Jorgesama.
+Debes imprimir una única línea con dos enteros $x$ e $y$ separados por un espacio.
+Estos enteros corresponden a las coordenadas del planeta del gran Jorgesama.
 \end{outputDescription}
 
 \begin{scoreDescription}
-\score{10} Se probar\'an varios casos en donde $1 \leq n \leq 8$.
-\score{20} Se probar\'an varios casos en donde $1 \leq n \leq 100$.
-\score{20} Se probar\'an varios casos en donde $1 \leq n \leq 10^5$.
-\score{50} Se probar\'an varios casos donde $1 \leq n \leq 10^{15}$. 
+\score{10} Se probarán varios casos en donde $1 \leq N \leq 8$.
+\score{20} Se probarán varios casos en donde $1 \leq N \leq 100$.
+\score{40} Se probarán varios casos en donde $1 \leq N \leq 10^5$.
+\score{30} Se probarán varios casos donde $1 \leq N \leq 10^{15}$. 
 \end{scoreDescription}
 
 \begin{sampleDescription}
-\sampleIO{sample1}
+% \sampleIO{sample1}
+\sampleIO{sample2}
+\sampleIO{sample3}
+\sampleIO{sample4}
+\sampleIO{sample5}
+\sampleIO{sample6}
 \end{sampleDescription}
 
 \end{document}
