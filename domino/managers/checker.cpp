@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <vector>
 
 
@@ -53,6 +54,7 @@ int main (int argc, char *argv[]) {
 	fcorr.close();	// Unused
 	
 	int t, n, k, f, ld;
+	string raw_ans;
 	bool ans, feasible;
 	int *d;
 	
@@ -61,7 +63,13 @@ int main (int argc, char *argv[]) {
 	switch (t) {
 	case 1:
 		fin >> n;
-		ftest >> ans;
+		ftest >> raw_ans;
+		if (raw_ans == "true")
+			ans = true;
+		else if (raw_ans == "false")
+			ans = false;
+		else
+			return wrong_ans();
 		return ans == fn_cuadrado(n) ? right_ans() : wrong_ans();
 		
 	case 2:
@@ -69,20 +77,32 @@ int main (int argc, char *argv[]) {
 		d = new int[ld];
 		for (int i = 0; i < ld; i++)
 			fin >> d[i];
-		ftest >> ans;
+		ftest >> raw_ans;
+		if (raw_ans == "true")
+			ans = true;
+		else if (raw_ans == "false")
+			ans = false;
+		else
+			return wrong_ans();
 		return ans == fn_validar(n, d) ? right_ans() : wrong_ans();
 		
 	case 3:
 		fin >> n >> k >> ld;
 		d = new int[ld];
-		ftest >> ans;
+		ftest >> raw_ans;
+		if (raw_ans == "true")
+			ans = true;
+		else if (raw_ans == "false")
+			ans = false;
+		else
+			return wrong_ans();
 		for (int i = 0; i < ld; i++)
 			ftest >> d[i];
 		f = fn_fichas(n);
-		feasible = fn_cuadrado(n) && k >= f * (n-1) && k <= (f+4) * (n-1);
+		feasible = fn_cuadrado(n) && k >= f / 4 * (n-1) && k <= (f / 4 + 1) * (n-1);
 		if (ans != feasible)
-			wrong_ans();
-		return eval_construir(n, k, f, d) ? right_ans() : wrong_ans();
+			return wrong_ans();
+		return !feasible || eval_construir(n, k, f, d) ? right_ans() : wrong_ans();
 		
 	default:
 		return 1;

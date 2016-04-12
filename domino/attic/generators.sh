@@ -10,8 +10,8 @@ for n in 8 15 16; do for k in $(seq $(((n-1)*n*(n+1)/8-1)) $(((n-1)*n*(n+1)/8+n)
 for n in 9 10 13 14; do for k in $(seq $(((n-1)*n*(n+1)/8+n/2)) $(((n-1)*n*(n+1)/8+n/2))); do echo 3 >n${n}k${k}.in; echo $n $k $((n*(n+1))) >>n${n}k${k}.in; done; done
 
 #Subtask 5
-for n in $(seq 24 16 100); do for k in $(((n-1)*n*(n+1)/8)) $(((n-1)*n*(n+1)/8+n/2)); do echo 3 >n${n}k${k}.in; echo $n $k $((n*(n+1))) >>n${n}k${k}.in; done; done
-for n in $(seq 31 16 100); do for k in $(((n-1)*n*(n+1)/8+n-1)) $(((n-1)*n*(n+1)/8+n/2)); do echo 3 >n${n}k${k}.in; echo $n $k $((n*(n+1))) >>n${n}k${k}.in; done; done
-for n in 48 55 63 96; do echo 3 >n${n}k${k}.in; echo $n $(((n-1)*n*(n+1)-1)) $((n*(n+1))) >>n${n}k${k}.in; done
-for n in 32 56 79 95; do echo 3 >n${n}k${k}.in; echo $n $(((n-1)*n*(n+1)+n)) $((n*(n+1))) >>n${n}k${k}.in; done
-for n in 38 66 76 85; do echo 3 >n${n}k${k}.in; echo $n $(((n-1)*n*(n+1)+n/2)) $((n*(n+1))) >>n${n}k${k}.in; done
+for n in $(seq 24 232 1000); do for k in $(((n-1)*n*(n+1)/8)) $(((n-1)*n*(n+1)/8+n/2)); do echo 3 >n${n}k${k}.in; echo $n $k $((n*(n+1))) >>n${n}k${k}.in; done; done
+for n in $(seq 31 232 1000); do for k in $(((n-1)*n*(n+1)/8+n-1)) $(((n-1)*n*(n+1)/8+n/2)); do echo 3 >n${n}k${k}.in; echo $n $k $((n*(n+1))) >>n${n}k${k}.in; done; done
+for n in 96 472 559 631 984; do echo 3 >n${n}k$(((n-1)*n*(n+1)/8-1)).in; echo $n $(((n-1)*n*(n+1)/8-1)) $((n*(n+1))) >>n${n}k$(((n-1)*n*(n+1)/8-1)).in; done
+for n in 95 320 567 792 959; do echo 3 >n${n}k$(((n-1)*n*(n+1)/8+n)).in; echo $n $(((n-1)*n*(n+1)/8+n)) $((n*(n+1))) >>n${n}k$(((n-1)*n*(n+1)/8+n)).in; done
+for n in 85 381 606 763 860; do echo 3 >n${n}k$(((n-1)*n*(n+1)+n/2)).in; echo $n $(((n-1)*n*(n+1)+n/2)) $((n*(n+1))) >>n${n}k$(((n-1)*n*(n+1)+n/2)).in; done
