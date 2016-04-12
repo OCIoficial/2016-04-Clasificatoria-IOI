@@ -13,6 +13,7 @@
 #include <queue>
 #include <tuple>
 #include <climits>
+#include <iostream>
 using namespace std;
 typedef tuple<int, int, int> ti;
 
@@ -31,11 +32,10 @@ void vecinos(const vector<vector<bool> > &roca, int x, int y, Fun f) {
   int dy[] = { 0, 1, 0,-1};
 
   for (int i = 0; i < 4; ++i) {
-    int cx = x;
-    int cy = y;
+    int cx = x, cy = y;
     while (!choca(roca, cx+dx[i], cy+dy[i]))
       cx += dx[i], cy += dy[i];
-    f(cx, cy);
+    f(cx, cy, abs(cx-x) + abs(cy-y));
   }
 }
 
@@ -55,10 +55,9 @@ int minimo(vector<vector<bool> > &roca, int N, int xi, int yi, int xf, int yf) {
 
     if (d > dist[x][y])
       continue;
-    vecinos(roca, x, y, [&](int vx, int vy) {
-        int new_dist = dist[x][y] + d;
-        if (new_dist < dist[vx][vy])
-          q.push(make_tuple(new_dist, vx, vy)), dist[vx][vy] = new_dist;
+    vecinos(roca, x, y, [&](int vx, int vy, int vd) {
+        if (d + vd < dist[vx][vy])
+          q.push(make_tuple(d + vd, vx, vy)), dist[vx][vy] = d + vd;
       });
   }
   return -1;
@@ -77,7 +76,7 @@ int main() {
     for (int j = 0; j < N; ++j) {
       int b;
       scanf("%d", &b);
-      roca[i][j] = b;
+      roca[j][i] = b;
     }
   }
 
