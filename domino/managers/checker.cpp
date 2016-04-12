@@ -6,10 +6,10 @@
 using namespace std;
 
 bool fn_cuadrado(int n);
-bool fn_validar(int n, vector<int> &d);
+bool fn_validar(int n, int d[]);
 int fn_fichas(int n);
-int fn_sum(int n, int f, vector<int> &d);
-bool eval_construir(int n, int k, int f, vector<int> &d);
+int fn_sum(int n, int f, int d[]);
+bool eval_construir(int n, int k, int f, int d[]);
 
 int wrong_ans() {
 	cout << "0.0\n";
@@ -54,7 +54,7 @@ int main (int argc, char *argv[]) {
 	
 	int t, n, k, f, ld;
 	bool ans, feasible;
-	vector<int> d;
+	int *d;
 	
 	fin >> t;
 	
@@ -66,7 +66,7 @@ int main (int argc, char *argv[]) {
 		
 	case 2:
 		fin >> n >> ld;
-		d.resize(ld);
+		d = new int[ld];
 		for (int i = 0; i < ld; i++)
 			fin >> d[i];
 		ftest >> ans;
@@ -74,7 +74,7 @@ int main (int argc, char *argv[]) {
 		
 	case 3:
 		fin >> n >> k >> ld;
-		d.resize(ld);
+		d = new int[ld];
 		ftest >> ans;
 		for (int i = 0; i < ld; i++)
 			ftest >> d[i];
@@ -93,7 +93,7 @@ bool fn_cuadrado(int n) {
 	return (n-1) % 8 >= 6;
 }
 
-bool fn_validar(int n, vector<int> &d) {
+bool fn_validar(int n, int d[]) {
 	if (!fn_cuadrado(n))
 		return false;
 	
@@ -125,7 +125,7 @@ int fn_fichas(int n) {
 	return n * (n + 1) / 2;
 }
 
-int fn_sum(int n, int f, vector<int> &d) {
+int fn_sum(int n, int f, int d[]) {
 	int side;
 	for (int i = 0; i < 4; i++) {
 		int curr = 0;
@@ -141,7 +141,7 @@ int fn_sum(int n, int f, vector<int> &d) {
 	return side;
 }
 
-bool eval_construir(int n, int k, int f, vector<int> &d) {
+bool eval_construir(int n, int k, int f, int d[]) {
 	if (!fn_validar(n, d) || k != fn_sum(n, f, d)) {
 		return false;
 	}

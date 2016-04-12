@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 
 #include "domino.h" 
 
@@ -8,7 +7,7 @@ using namespace std;
 
 int main() {
 	int t, n, k, ld;
-	vector<int> d;
+	int *d;
 	
 	cin >> t;
 	
@@ -20,7 +19,7 @@ int main() {
 		
 	case 2:
 		cin >> n >> ld;
-		d.resize(ld);
+		d = new int[ld];
 		for (int i = 0; i < ld; i++) {
 			cin >> d[i];
 		}
@@ -29,7 +28,7 @@ int main() {
 		
 	case 3:
 		cin >> n >> k >> ld;
-		d.resize(ld, -1);
+		d = new int[ld];
 		cout << construir(n, k, d) << endl;
 		for (int i = 0; i < ld; i++) {
 			cout << d[i] << (i+1 != ld ? " " : "\n");

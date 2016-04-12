@@ -4,13 +4,19 @@
 #include "domino.h"
 
 
+using namespace std;
+
+int suma(int, int, int d[]);
+int fichas(int);
+pair<int,int> pareja(int, int, int);
+
 bool cuadrado(int n) {
 	return (n-1) % 8 >= 6;
 }
 
-bool validar(int n, vector<int> d) {
+bool validar(int n, int d[]) {
 	// Revisa que n es válido
-	if (!fn_cuadrado(n))
+	if (!cuadrado(n))
 		return false;
 	// Revisa si los lados suman lo mismo
 	int f = fichas(n);
@@ -37,7 +43,7 @@ bool validar(int n, vector<int> d) {
 	return true;
 }
 
-bool construir(int n, int k, vector<int> d) {
+bool construir(int n, int k, int d[]) {
 	int f = fichas(n);
 	int p = f / 2;
 	if (!cuadrado(n) || k < f * (n - 1) || k > (f + 4) * (n - 1))
@@ -61,11 +67,11 @@ bool construir(int n, int k, vector<int> d) {
 			d[s * p + 1] = s;
 			a = c > s? c : s;
 			b = c > s? s : c;
-			pair<int,int> p = pareja(a, b, n);
-			d[s * p + 2] = p.first;
-			d[s * p + 3] = p.second;
+			pair<int,int> par = pareja(a, b, n);
+			d[s * p + 2] = par.first;
+			d[s * p + 3] = par.second;
 			pieza[a][b] = true;
-			pieza[p.first][p.second] = true;
+			pieza[par.first][par.second] = true;
 		}
 		// Llenar el resto con parejas cualesquiera
 		for (int i = 2; 2 * i < p; i += 2) {
@@ -81,11 +87,11 @@ bool construir(int n, int k, vector<int> d) {
 				}
 				d[s * p + 2 * i] = a;
 				d[s * p + 2 * i + 1] = b;
-				pair<int,int> p = pareja(a, b, n);
-				d[s * p + 2 * i + 2] = p.first;
-				d[s * p + 2 * i + 3] = p.second;
+				pair<int,int> par = pareja(a, b, n);
+				d[s * p + 2 * i + 2] = par.first;
+				d[s * p + 2 * i + 3] = par.second;
 				pieza[a][b] = true;
-				pieza[p.first][p.second] = true;
+				pieza[par.first][par.second] = true;
 			}
 		}
 	} else {
@@ -99,10 +105,10 @@ bool construir(int n, int k, vector<int> d) {
 			b = c > s? s : c;
 			pieza[a][b] = true;
 			if (a + b != n - 1) {
-				pair<int,int> p = pareja(a, b, n);
-				d[s * p + 2] = p.first;
-				d[s * p + 3] = p.second;
-				pieza[p.first][p.second] = true;
+				pair<int,int> par = pareja(a, b, n);
+				d[s * p + 2] = par.first;
+				d[s * p + 3] = par.second;
+				pieza[par.first][par.second] = true;
 			}
 		}
 		for (int s = 0; s < 4; s++) {
@@ -124,11 +130,11 @@ bool construir(int n, int k, vector<int> d) {
 				}
 				d[s * p + 2] = a;
 				d[s * p + 3] = b;
-				pair<int,int> p = pareja(a, b, n);
-				d[s * p + 4] = p.first;
-				d[s * p + 5] = p.second;
+				pair<int,int> par = pareja(a, b, n);
+				d[s * p + 4] = par.first;
+				d[s * p + 5] = par.second;
 				pieza[a][b] = true;
-				pieza[p.first][p.second] = true;
+				pieza[par.first][par.second] = true;
 			}
 		}
 		// Llenar el resto con parejas cualesquiera
@@ -145,11 +151,11 @@ bool construir(int n, int k, vector<int> d) {
 				}
 				d[s * p + 2 * i] = a;
 				d[s * p + 2 * i + 1] = b;
-				pair<int,int> p = pareja(a, b, n);
-				d[s * p + 2 * i + 2] = p.first;
-				d[s * p + 2 * i + 3] = p.second;
+				pair<int,int> par = pareja(a, b, n);
+				d[s * p + 2 * i + 2] = par.first;
+				d[s * p + 2 * i + 3] = par.second;
 				pieza[a][b] = true;
-				pieza[p.first][p.second] = true;
+				pieza[par.first][par.second] = true;
 			}
 		}
 	}
@@ -171,7 +177,7 @@ int fichas(int n) {
 	return n * (n + 1) / 2;
 }
 
-int suma(int n, int f, vector<int> d) {
+int suma(int n, int f, int d[]) {
 	int side;
 	for (int i = 0; i < 4; i++) {
 		int curr = 0;
