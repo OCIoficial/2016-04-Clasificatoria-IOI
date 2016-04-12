@@ -8,12 +8,9 @@
  */
 #include "hielo.h"
 
-#include <cstdio>
-#include <cstdlib>
 #include <queue>
 #include <tuple>
 #include <climits>
-#include <iostream>
 using namespace std;
 typedef tuple<int, int, int> ti;
 
@@ -63,29 +60,3 @@ int minimo(vector<vector<bool> > &roca, int N, int xi, int yi, int xf, int yf) {
   return -1;
 }
 
-int main() {
-  int T, N;
-
-  scanf("%d%d", &T, &N);
-
-  int xi, yi, xf, yf;
-  scanf("%d%d%d%d", &xi, &yi, &xf, &yf);
-
-  vector<vector<bool> > roca(N, vector<bool>(N));
-  for (int i = 0; i < N; ++i) {
-    for (int j = 0; j < N; ++j) {
-      int b;
-      scanf("%d", &b);
-      roca[j][i] = b;
-    }
-  }
-
-  if (T == 1)
-    printf(posible(roca, N, xi, yi, xf, yf) ? "true\n" : "false\n");
-  else if (T == 2)
-    printf("%d\n", minimo(roca, N, xi, yi, xf, yf));
-  else
-    exit(1);
-
-  return 0;
-}
