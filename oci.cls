@@ -4,7 +4,7 @@
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
-\LoadClass[11pt]{article}
+\LoadClass[11pt,twoside]{article}
 
 \RequirePackage{ifthen}
 \RequirePackage{fancyhdr}
@@ -12,6 +12,11 @@
 \RequirePackage{verbatim}
 \RequirePackage{enumitem}
 
+%% Catch environment variable
+\RequirePackage{catchfile}
+\newcommand{\getenv}[2][]{%
+  \CatchFileEdef{\temp}{"|kpsewhich --var-value #2"}{\endlinechar=-1}%
+  \if\relax\detokenize{#1}\relax\temp\else\let#1\temp\fi}
 
 
 %% GEOMETRY
@@ -24,57 +29,71 @@
 \parindent      0.0in
 
 
+%% PAGE NUMBERING
+\global\let\@pagenumber\@empty
+\getenv[\@pagenumber]{OCIMATIC_PAGE_NUMBER}
+\if\@pagenumber\@empty
+\else
+\setcounter{page}{\@pagenumber}
+\fi
+% \setcounter{page}{11}
+
+
+
 %% EXTRA
 \addtolength{\parskip}{0.4\baselineskip}
 
 %% HEADER
 \global\let\@phase\@empty
+\getenv[\@phase]{OCIMATIC_PHASE}
 \newcommand{\phase}[1]{\def\@phase{#1}}
+\newcommand{\thephase}{\@phase}
 
 \setlength\headheight{54.3pt} 
 \pagestyle{fancy}
 \lhead{\includegraphics[height=37.5pt]{logo.eps}}
 \rhead{\@phase\ \the\year}
+\cfoot{}
 \renewcommand{\headrulewidth}{0.2pt}
 
 
 %% TITLE
-\newif\ifproblemcnt%
-\problemcntfalse%
+% \newif\ifproblemcnt%
+% \problemcntfalse%
 % \global\let\@filename\@empty
 % \newcommand{\filename}[1]{\def\@filename{#1}}
 
 \global\let\@problem\@empty
+\getenv[\@problem]{OCIMATIC_PROBLEM_NUMBER}
 \newcommand{\problem}[1]{\def\@problem{#1}}
-\newcounter{problemcnt}
-\setcounter{problemcnt}{1}
+% \newcounter{problemcnt}
+% \setcounter{problemcnt}{1}
 
 \renewcommand{\maketitle}{
     \begin{center}
-      \ifproblemcnt%
-      {\huge\bf \sf Problema \Alph{problemcnt}}\\
-      \else
+      % \ifproblemcnt%
+      % {\huge\bf \sf Problema \Alph{problemcnt}}\\
+      % \else
       {\huge\bf \sf Problema \@problem}\\
-      \fi
+      % \fi
     \LARGE{\sf \@title}\\[2mm]
     % \normalsize {\em archivo:} {\tt \@filename\{.c,.cpp,.pas\}}
     \vspace{6pt}
     \end{center}
-    \stepcounter{problemcnt}
+    % \stepcounter{problemcnt}
 }
 
-\renewcommand*{\cleardoublepage}{\clearpage\if@twoside \ifodd\c@page\else
+\renewcommand*{\cleardoublepage}{\clearpage\if@twoside\ifodd\c@page\else%
 \hbox{}%
 \thispagestyle{empty}%
-\newpage%
-\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\clearpage%
+\if@twocolumn\hbox{}\clearpage\fi\fi\fi}
 
 %% Secciones de description
 \renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
                                      {-1.0ex\@plus -1ex \@minus -.2ex}%
                                      {1.0ex \@plus .2ex}%
                                    {\reset@font\large\bfseries}}
-\newenvironment{problemDescription}{\cleardoublepage\maketitle}{}
 \newenvironment{inputDescription}{\subsection*{Entrada}}{\par}
 \newenvironment{outputDescription}{\subsection*{Salida}}{\par}
 
@@ -114,3 +133,5 @@
 
 \newenvironment{sampleDescription}{\subsection*{Ejemplos de Entrada y Salida}}{}
 
+\AtEndDocument{\cleardoublepage}
+% \AtEndDocument{\clearpage\ifodd\value{page}\else\null\thispagestyle{empty}\clearpage\fi}
