@@ -60,57 +60,123 @@ Para esto, tendrás que implementar algunas funciones que simplificarán enormem
 
 
 
-\subsection*{Subtarea 1}
+\subsection*{Subtarea 1 (25 pts)}
 La primera subtarea consiste en implementar la función \verb+cuadrado+ que determina para un $n$ si es posible formar un cuadrado con un $n$-dominó.
 En esta subtarea no importa la suma de los valores de cada lado, sólo se pide determinar si es posible formar un cuadrado válido usando todas las piezas del $n$-dominó.
 
 \begin{itemize}
  \item \verb+bool cuadrado(int n)+
  \begin{itemize}
-  \item \verb+n+: indica el tamaño del juego de $n$-dominó.
+  \item \verb+n+: indica el tamaño del $n$-dominó.
   \item \emph{return}: un booleano con valor \verb+true+ si se puede formar un cuadrado, y \verb+false+ si no.
  \end{itemize}
 \end{itemize}
 
-\subsection*{Subtarea 2}
-La subtarea 2 consiste en implementar la función \verb+validar+ que dada la especificación de un cuadrado formado con un $n$-dominó y un valor $k$ debe verificar que este cumple con la restricción de que todos los lados sumen lo mismo.
-Esto también implica verificar que las fichas correspondan a las del juego completo de $n$-dominó.
-Debes asumir que el cuadrado especificado es válido.
-En particular para el $n$-dominó entregado es posible formar un cuadrado válido.
+Para esta subtarea se probará la función \verb+duadrado+ con varios casos donde $N\leq 1000$ (25pts).
+
+\subsection*{Subtarea 2 (20 pts)}
+La subtarea 2 consiste en implementar la función \verb+validar+ que dada la especificación de un cuadrado formado con un $n$-dominó debe verificar que este cumple con la restricción de que todos los lados sumen lo mismo.
+Esto también implica verificar que las fichas usadas correspondan a las del $n$-dominó, es decir, cada ficha es usada exactamente una vez.
+Debes asumir que para el $n$-dominó entregado es posible formar un cuadrado válido, es decir, \verb+cuadrado(n)+ retorna \verb+true+.
 
 \begin{itemize}
- \item \verb+bool validar(int n, int d[])+
+ \item \verb+bool validar(int n, int f, int fichas[])+
  \begin{itemize}
-  \item \verb+n+: indica el tamaño del juego de $n$-dominó.
-  \item \verb+d+: arreglo de $2f$ enteros, donde se guardan ordenadas las fichas que forman el cuadrado.
+  \item \verb+n+: indica el tamaño del $n$-dominó.
+  \item \verb+f+: indica la cantidad de fichas que tiene el $n$-dominó.
+  \item \verb+fichas+: arreglo de enteros de tamaño $2\times\texttt{f}$ donde se especifica el cuadrado. Más adelante se detalla el formato en que el cuadrado debe ser especificado.
   \item \emph{return}: un booleano con valor \verb+true+ si los cuatro lados suman lo mismo, y \verb+false+ si no.
  \end{itemize}
 \end{itemize}
 
-\subsection*{Subtarea 3, 4 y 5}
-Para las subtareas 3, 4 y 5, debes implementar la función \verb+construir+ que para $n$ y $k$ construye, si es posible, un cuadrado $(n,k)$, y retorna \verb+true+ si es posible o \verb+false+ si no.
+Para esta subtarea se probará la función \verb+validar+ con varios casos donde $N\leq 1000$ (20pts).
+
+\subsection*{Subtarea 3 y 4}
+Para las subtareas 3, 4 y 5, debes implementar la función \verb+construir+ que para un $n$ y un $k$ dados construye un cuadrado $(n,k)$ en caso de ser posible.
+Debes asumir que para el $n$-dominó entregado es posible formar un cuadrado válido, es decir, \verb+cuadrado(n)+ retorna \verb+true+.
+No obstante, puede que ser posible que para el valor de $k$ no sea posible formar un cuadrado $(n,k)$.
+Si es posible formar un cuadrado $(n,k)$ la función debe retornar \verb+true+, en caso contrario debe retornar \verb+false+.
 \begin{itemize}
- \item \verb+bool construir(int n, int k, int d[])+
+ \item \verb+bool construir(int n, int k, int f, int fichas[])+
  \begin{itemize}
-  \item \verb+n, k+: valores para $n,k$, que indican el cuadrado $(n,k)$ que se quiere construir.
-  \item \verb+d+: arreglo de $2f$ enteros, donde debes guardar los valores de las fichas de un cuadrado $(n,k)$, partiendo desde alguna esquina. Observa que $f$ es el número de piezas de dominó.
+  \item \verb+n, k+: valores que indican el cuadrado $(n,k)$ que se quiere construir.
+  \item \verb+f+: indica la cantidad de fichas que tiene el $n$-dominó.
+  \item \verb+d+: arreglo de enteros de tamaño $2\times\texttt{f}$ donde debes guardar la especificación del cuadrado $(n,k)$. Más adelante se detalla la forma de especificar el cuadrado.
+    Tu función debe llenar este arreglo. Su contenido será revisado solo en el caso en que la función retorne \verb+true+.
   \item \emph{return}: un booleano con valor \verb+true+ si se puede formar un cuadrado $(n,k)$, y \verb+false+ si no.
  \end{itemize}
 \end{itemize}
 
+Para la subtarea 3 se probará la función \verb+validar+ con varios casos donde $N\leq 17$ (20pts).
+Para la subtarea 4 se probará la función \verb+validar+ con varios casos donde $N\leq 10000$ (25pts).
+
 \paragraph{Convención sobre el formato del arreglo \emph{d}}
-Para las funciones \verb+validar+ y \verb+construir+, respectivamente al revisar y llenar el arreglo \verb+d+, considera siempre que la posición 0 es una esquina, y que el resto se enumera en un sentido tal que los pares de valores de una misma ficha siempre quedan en posiciones adyacentes en el arreglo. El orden es fundamental para que los códigos puedan ser evaluados correctamente.
+La función \verb+validar+ recibe como parámetro un arreglo de enteros \verb+fichas+ donde se especifica un cuadrado formado con las fichas de un $n$-domino.
+De la misma forma \verb+construir+ debe llenar el arreglo \verb+fichas+ para especificar el cuadrado que construye.
+A continuación se detalla la forma en que un cuadrado es especificado en el arreglo \verb+fichas+.
 
-Por ejemplo, la figura \ref{f:cuadrado7} puede ser guardada en el arreglo de la siguiente manera (partiendo de la esquina superior izquierda):
+Si $f$ es la cantidad de fichas de un $n$-dominó el arreglo \verb+fichas+ es de tamaño $2\times f$.
+Por ejemplo, como un $7$-dominó tiene 28 fichas puede ser guardado en un arreglo de tamaño 56.
+El arreglo es tal que dos posiciones seguidas corresponden a una ficha.
+La posición 0 y la 1 corresponden a la primera ficha, la 2 y la 3 a la segunda ficha y así hasta la última ficha que corresponde a las posiciones $2\times f-2$ y $2\times f-1$ en el arreglo.
+Las fichas en el arreglo se especifican en sentido horario partiendo desde la esquina superior izquierda.
+Por ejemplo, el cuadrado mostrado en la Figura~\ref{f:cuadrado7} puede ser guardada un arreglo de la siguiente manera.
 
-\[ 6, 2, 0, 4, 5, 1, 4, 6, 3, 1, 1, 0, 4, 5, 3, 4, 0, 0, \dots, 1, 4, 5, 5, 2, 3, 3, 0, 0, 6, 0, 2, 6, 5, 2, 2, 5, 3 \]
+\begin{center}
+% \def\arraystretch{1}
+  \setlength\tabcolsep{0.8mm}
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \multicolumn{1}{c}{\tiny \ 0} & 
+  \multicolumn{1}{c}{\tiny \ 1} & 
+  \multicolumn{1}{c}{\tiny \ 2} & 
+  \multicolumn{1}{c}{\tiny \ 3} & 
+  \multicolumn{1}{c}{\tiny \ 4} & 
+  \multicolumn{1}{c}{\tiny \ 5} & 
+  \multicolumn{1}{c}{\tiny \ 6} & 
+  \multicolumn{1}{c}{\tiny \ 7} & 
+  \multicolumn{1}{c}{\tiny \ 8} & 
+  \multicolumn{1}{c}{\tiny \ 9} & 
+  \multicolumn{1}{c}{\tiny 10} & 
+  \multicolumn{1}{c}{\tiny 11} & 
+  \multicolumn{1}{c}{\tiny 12} & 
+  \multicolumn{1}{c}{\tiny 13} & 
+  \multicolumn{1}{c}{\tiny 14} & 
+  \multicolumn{1}{c}{\tiny 15} & 
+  \multicolumn{1}{c}{\tiny 16} & 
+  \multicolumn{1}{c}{\tiny 17} & 
+  \multicolumn{1}{c}{\tiny \ldots} & 
+  \multicolumn{1}{c}{\tiny 38} & 
+  \multicolumn{1}{c}{\tiny 39} & 
+  \multicolumn{1}{c}{\tiny 40} & 
+  \multicolumn{1}{c}{\tiny 41} & 
+  \multicolumn{1}{c}{\tiny 42} & 
+  \multicolumn{1}{c}{\tiny 43} & 
+  \multicolumn{1}{c}{\tiny 44} & 
+  \multicolumn{1}{c}{\tiny 45} & 
+  \multicolumn{1}{c}{\tiny 46} & 
+  \multicolumn{1}{c}{\tiny 47} & 
+  \multicolumn{1}{c}{\tiny 48} & 
+  \multicolumn{1}{c}{\tiny 49} & 
+  \multicolumn{1}{c}{\tiny 50} & 
+  \multicolumn{1}{c}{\tiny 51} & 
+  \multicolumn{1}{c}{\tiny 52} & 
+  \multicolumn{1}{c}{\tiny 53} & 
+  \multicolumn{1}{c}{\tiny 54} & 
+  \multicolumn{1}{c}{\tiny 55}
+\\
+  \hline
+ 6& 2& 0& 4& 5& 1& 4& 6& 3& 1& 1& 0& 4& 5& 3& 4& 0& 0& \ldots& 1& 4& 5& 5& 2& 3& 3& 0& 0& 6& 0& 2& 6& 5& 2& 2& 5& 3 \\
+  \hline
+\end{tabular} 
+\end{center}
 
-\begin{scoreDescription}
-  \score{25} Implementar la función cuadrado, para $n \le 1000$.
-  \score{20} Implementar la función validar, para $n \le 1000$.
-  \score{10} Implementar la función construir, con $n \le 7$.
-  \score{20} Implementar la función construir, para $n \le 16$.
-  \score{25} Implementar la función construir, para $n \le 1000$.
-\end{scoreDescription}
+% \begin{scoreDescription}
+%   \score{25} Implementar la función cuadrado, para $n \le 1000$.
+%   \score{20} Implementar la función validar, para $n \le 1000$.
+%   \score{10} Implementar la función construir, con $n \le 7$.
+%   \score{20} Implementar la función construir, para $n \le 16$.
+%   \score{25} Implementar la función construir, para $n \le 1000$.
+% \end{scoreDescription}
 
 \end{document}
