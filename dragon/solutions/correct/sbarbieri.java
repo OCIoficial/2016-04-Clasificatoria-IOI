@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 
 
-public class solucion {
+public class sbarbieri {
 	
 	static public int[] xa,ya,xb,yb,dira,dirb;
 	static public long[] c;

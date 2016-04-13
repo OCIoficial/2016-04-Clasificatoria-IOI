@@ -19,11 +19,11 @@
 \def\ag{\mathcal{A}}
 \def\CC{\mathcal{C}}
 
-\title{Camino del drag\'on}
+\title{El camino del drag\'on}
 
 \begin{document}
 \maketitle
-Nuestro héroe Olon-sonkú debe recorrer el camino del dragón para llegar al planeta de Jorgesama y aumentar su poder de pelea. Desgraciadamente, el camino del dragón no es en línea recta, sino que es un camino fractal conocido como la curva del dragón de Highway.
+Nuestro héroe Olon-sonkú debe recorrer el camino del dragón para llegar al planeta de Jorgesama y aumentar su poder de pelea. Desgraciadamente, el camino del dragón no es en línea recta, sino que es un camino infinito conocido como la curva del dragón de Highway.
 
 
 \begin{wrapfigure}{r}{0.5\textwidth}
@@ -34,38 +34,41 @@ Nuestro héroe Olon-sonkú debe recorrer el camino del dragón para llegar al pl
 \end{wrapfigure}
 
 Si bien nuestro amigo Olon-sonkú tiene una gran fuerza física, su inteligencia es bastante escasa.
-Incluso los cálculos más simples de aritmética son un gran desafío para Olon-sonkú.
-En este caso se encuentra en un gran problema pues para lograr su cometido debe calcular las coordenadas del planeta del gran Jorgesama que se encuentra siempre al final del camino del dragón.
+Incluso los cálculos más simples de aritmética son un gran desafío para él.
+En este caso se encuentra en un gran problema pues para lograr su cometido debe calcular las coordenadas del planeta del gran Jorgesama que se encuentra en algún lugar del camino del dragón.
 Por fortuna su amiga Bulnelman planea ayudarlo a realizar esta tarea.
 
-Bulnelman estudió detenidamente el camino del dragón y descubrió que este puede ser descrito de manera muy simple.
-Para describir el camino del dragón se denotará con una $A$ la acción de avanzar un paso, con una $R$ la acción de rotar $90^{\circ}$ grados a la derecha y con una $L$ la acción de rotar $90^{\circ}$ a la izquierda.
-Un camino del dragón es representado por una secuencia formada por estas letras que determina cuales son las acciones que hay que realizar para recorrer el camino.
+Bulnelman estudió detenidamente el camino del dragón y descubrió que este puede ser descrito de manera simple.
+El verdadero camino del dragón es un camino infinito, pero a continuación hablaremos de varios caminos finitos que llamaremos también caminos del dragón.
+Para describir un camino del dragón se denotará con una $A$ la acción de avanzar un paso, con una $R$ la acción de rotar $90^{\circ}$ grados a la derecha y con una $L$ la acción de rotar $90^{\circ}$ a la izquierda.
+Un camino del dragón corresponde a una secuencia de estos símbolos que representan las acciones que hay que realizar para recorrerlo.
 No obstante, no cualquier secuencia formada con estas letras corresponde a un camino del dragón válido.
 Las secuencias válidas son generadas por un sistema de reescritura.
-Llamaremos secuencias del dragón a las secuencias que corresponden a un camino del dragón válido.
+Llamaremos secuencias del dragón a las secuencias generadas por este sistema.
 
 Un sistema de reescritura consiste en una serie de reglas para transformar una secuencia.
 Cada regla contiene un símbolo a la izquierda y una secuencia a la derecha.
-Aplicar una regla significa que cada aparición del símbolo de la izquierda debe ser reemplazado por la secuencia de la derecha.
-Las reglas para generar secuencias que representen un camino del dragón válido usan dos símbolos auxiliares $a$ y $b$.
+Aplicar una regla significa que cada aparición del símbolo de la izquierda debe ser reemplazada por la secuencia de la derecha.
+Las reglas para generar secuencias del dragón usan dos símbolos auxiliares $a$ y $b$.
 Estos símbolos no representan acciones y solo son usados para generar las secuencias.
 Las reglas correspondientes al camino del dragón son las siguientes.
 $$a \rightarrow aRbAR \ \ \ \ \ \ \ \ \ \   b \rightarrow LAaLb$$
-Para generar secuencias válidas para un camino del dragón hay que partir con la secuencia $Aa$ y aplicar iterativamente estas reglas de reescritura.
+Para generar secuencias del dragón hay que partir con la secuencia $Aa$ y aplicar iterativamente estas reglas de reescritura.
 A continuación se muestra la aplicación de las reglas en tres iteraciones consecutivas.
 En cada paso ambas reglas son aplicadas simultáneamente.
 $$Aa \rightarrow AaRbAR \rightarrow AaRbARRLAaLbAR \rightarrow AaRbARRLAaLbARRLAaRbARLLAaLbAR$$
 En el primer paso el símbolo $a$ es reemplazado en $Aa$ por la secuencia $aRbAR$ resultando $AaRbAR$.
 A continuación se reemplaza simultáneamente la $a$ por $aRbAR$ y la $b$ por $LAaLB$ dando como resultado la secuencia $AaRbARRLAaLbAR$.
 Finalmente después de la tercera iteración se obtiene la secuencia $AaRbARRLAaLbARRLAaRbARLLAaLbAR$.
+Notar que después de cada iteración la secuencia resultante es una extensión de la anterior.
+Esto significa que después de cada iteración la secuencia resultante se acerca más al camino del dragón real.
 
 Cada una de las secuencias generadas en el proceso da origen a una secuencia del dragón que corresponde a la secuencia generada eliminando las ocurrencias de $a$ y $b$.
-Por ejemplo las secuencias $ARAR$, $ARARRLALAR$ y $ARARRLALARRLARARLLALAR$ son las secuencias del dragón originadas a partir de las secuencias generadas en las primeras tres iteraciones.
+Por ejemplo, las secuencias $A$, $ARAR$, $ARARRLALAR$ y $ARARRLALARRLARARLLALAR$ son las secuencias del dragón originadas a partir de las primeras tres iteraciones.
 
-Para calcular el final del camino para una secuencia del dragón hay que ejecutar las acciones especificadas en ella.
-Para esto supondremos que Olon-sonkú siempre comienza en la posición $(0,0)$ mirando hacia el norte.
-A continuación se muestra un ejemplo donde se ejecutan las acciones para la secuencia $ARARRLALARRLARARLLALAR$ junto a una figura:
+Cada una de las secuencias del dragón corresponde a una serie de acciones que hay que hacer para recorrer el camino correspondiente.
+Para determinar la posición en que queda Olon-sonkú después de realizar las acciones supondremos que siempre comienza en la posición $(0,0)$ mirando hacia el norte.
+A continuación se muestra un ejemplo donde se ejecutan las acciones para la secuencia $ARARRLALARRLARARLLALAR$ junto a una figura de ilustración:
 % \newpage
 \\
 
@@ -130,18 +133,20 @@ A continuación se muestra un ejemplo donde se ejecutan las acciones para la sec
 \end{minipage}
 \\
 
-Diremos que el camino tiene largo $N$ si se ejecuta la acción avanzar $N$ veces.
-Por ejemplo, el camino descrito anteriormente tiene largo $N = 8$.
-Notar que en cada iteración de la generación de las secuencias se agregan acciones de avanzar.
-Por ejemplo, no hay ningún camino del dragón con 
-Supón que Bulnelman sabe que el planeta de Jorgesama se encuentra al final del camino de un camino del dragón de largo $N$.
-?`Puedes ayudarnos a saber cual es la posición exacta dela planeta del gran Jorgesama?
+Diremos que un recorrido del dragón tiene largo $N$ si se ejecuta la acción avanzar $N$ veces.
+Por ejemplo, el recorrido descrito anteriormente tiene largo $N = 8$.
+Notar que para hacer un recorrido de largo $N$ hay que considerar una secuencia del dragón que tenga al menos $N$ acciones avanzar.
+Por ejemplo si se quiere hacer un recorrido de largo $N=5$ hay que considerar la secuencia $ARARRLALARRLARARLLALAR$ y ejecutar
+las primeras 5 acciones avanzar.
+Esto dejaría a Olon-sonkú en la posición $(2,-1)$.
+
+Supón que Bulnelman sabe que el planeta de Jorgesama se encuentra al final del recorrido del dragón de largo $N$.
+?`Puedes ayudarnos a saber cual es la posición exacta del planeta del gran Jorgesama?
 
 
 \begin{inputDescription}
 La entrada consiste en una linea con un único entero positivo $N$.
-Tu programa debe calcular las coordenadas del final del camino del dragón de largo $N$.
-El valor de $N$ siempre será un largo válido para un camino del dragón.
+Tu programa debe calcular las coordenadas del final del recorrido del dragón de largo $N$.
 \end{inputDescription}
 
 \begin{outputDescription}
@@ -150,14 +155,14 @@ Estos enteros corresponden a las coordenadas del planeta del gran Jorgesama.
 \end{outputDescription}
 
 \begin{scoreDescription}
-\score{10} Se probarán varios casos en donde $1 \leq N \leq 8$.
-\score{20} Se probarán varios casos en donde $1 \leq N \leq 100$.
-\score{40} Se probarán varios casos en donde $1 \leq N \leq 10^5$.
+\score{10} Se probarán varios casos donde $1 \leq N \leq 8$.
+\score{20} Se probarán varios casos donde $1 \leq N \leq 100$.
+\score{40} Se probarán varios casos donde $1 \leq N \leq 10^5$.
 \score{30} Se probarán varios casos donde $1 \leq N \leq 10^{15}$. 
 \end{scoreDescription}
 
 \begin{sampleDescription}
-% \sampleIO{sample1}
+\sampleIO{sample1}
 \sampleIO{sample2}
 \sampleIO{sample3}
 \sampleIO{sample4}
