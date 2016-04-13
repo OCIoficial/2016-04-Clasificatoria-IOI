@@ -9,22 +9,25 @@
 
 \begin{document}
 \begin{problemDescription}
-Un juego completo de fichas de dominó consiste en un conjunto de piezas rectangulares de $2\times1$, divididas en dos cuadrados, donde cada mitad tiene un número entre 0 y $n-1$, donde habitualmente $n$ es 7.
-Llamaremos juego de $n$-dominó al juego de dominó con el valor correspondiente para $n$, por ejemplo un juego de $7$-dominó es aquél cuyas piezas tienen valores entre 0 y 6.
-Además, hay una pieza para cada combinación, y toda combinación aparece exactamente una vez (1--3 y 3--1 son la misma pieza).
-Por ejemplo, un juego completo de \textbf{7-dominó} consiste en \textbf{28 piezas}.
+% Un juego completo de fichas de dominó consiste en un conjunto de piezas rectangulares de $2\times1$, divididas en dos cuadrados, donde cada mitad tiene un número entre 0 y $n-1$, donde habitualmente $n$ es 7.
+Un juego de fichas de dominó consiste en un conjunto de piezas rectangulares de $2\times1$, donde cada mitad contiene un número entre 0 y $n-1$. 
+% En el set del dominó habitual $n$ es igual 7.
+Llamaremos un $n$-dominó al juego de fichas donde el valor correspondiente es $n$.
+Por ejemplo, el juego de dominó normal es un $7$-dominó y sus piezas tienen valores entre 0 y 6.
+Además, en un $n$-dominó cada combinación de pares de números está presente exactamente una vez (1--3 y 3--1 son la misma pieza).
+Por ejemplo, un \textbf{7-dominó} consiste en \textbf{28 piezas}.
 
-Un juego de fichas de dominó es similar a una baraja de cartas, en cuanto a que ambos permiten jugar una gran variedad de juegos.
-Uno de estos es el del cuadrado.
-El juego\footnote{Inspirado en \emph{Matemáticas Recreativas} de Y. I. Perelman} consiste en formar, usando un juego \textbf{completo} de dominó, un cuadrado donde el número de piezas verticales y horizontales es el mismo (fig. \ref{f:cuadrados}), tal que para cada lado, la suma de los valores en él sea $k$.
-Está permitido poner juntos dos cuadrados de diferente valor (a diferencia del clásico juego de dominó).
-Llamaremos a este cuadrado el cuadrado $(n,k)$.
+Un $n$-dominó es tan versátil como una baraja de cartas, en cuanto a que ambos permiten jugar una gran variedad de juegos.
+Uno de estos es el del cuadrado\footnote{Inspirado en \emph{Matemáticas Recreativas} de Y. I. Perelman}.
+En el juego del cuadrado se te entrega un $n$-dominó y un valor $k$.
+El objetivo del juego es formar un cuadrado usando todas las piezas del $n$-dominó, de forma que para cada lado la suma de todos los valores en él sea $k$.
+% Este juego\footnote{Inspirado en \emph{Matemáticas Recreativas} de Y. I. Perelman} consiste en formar un cuadrado usando todas las piezas de un $n$-dominó,  donde el número de piezas verticales y horizontales es el mismo (fig. \ref{f:cuadrados}), tal que para cada lado, la suma de los valores en él sea $k$.
+% En este juego está permitido poner juntos dos cuadrados de diferente valor (a diferencia del clásico juego de dominó).
+A un cuadrado formado con un $n$-dominó de forma que los lados sumen $k$ lo llamaremos un cuadrado $(n,k)$.
 
-Por supuesto, no es posible completar este juego para todos los $n$ ni, dado $n$, para todos los $k$.
-Por ejemplo, si $n$ es 2, el juego completo de $2$-dominó tiene 3 piezas (0--0, 0--1 y 1--1) y no es posible armar un cuadrado con ellas; si $n$ es 7 y $k$ es 90, la suma de los lados será siempre menor que 90 por lo que no existe el cuadrado $(7,90)$.
-
-\begin{figure}[!h]
- \centering
+Para formar un cuadrado válido la cantidad de pieza verticales y horizontales debe ser la misma.
+A continuación se muestra una imagen de un cuadrado inválido y uno válido.
+\begin{figure}[h!]
  \begin{subfigure}[b]{0.45\textwidth}
   \centering
   \input{domino1}
@@ -40,9 +43,10 @@ Por ejemplo, si $n$ es 2, el juego completo de $2$-dominó tiene 3 piezas (0--0,
  \caption{Un cuadrado válido y uno inválido.}
  \label{f:cuadrados}
 \end{figure}
-
-Tu objetivo es, entonces, determinar una configuración de piezas para completar el cuadrado $(n,k)$.
-Para esto, tendrás que implementar algunas funciones que simplificarán enormemente la resolución del problema.
+Notar que no para cualquier valor de $n$ es posible formar un cuadrado con un $n$-dominó.
+Por ejemplo, el $2$-dominó está formado por 3 piezas (0--0, 0--1 y 1--1) y no es posible armar un cuadrado con ellas.
+Por otro lado, para un $n$-dominó donde si es posible formar un cuadrado no necesariamente es posible armar un cuadrado $(n,k)$ para cualquier $k$.
+Por ejemplo, para el $7$-dominó la suma de los lados siempre sera menor que 90, y por lo tanto no es posible formar un cuadrado $(7,90)$.
 
 \begin{figure}[ht]
  \centering
@@ -51,17 +55,15 @@ Para esto, tendrás que implementar algunas funciones que simplificarán enormem
  \label{f:cuadrado7}
 \end{figure}
 
+Tu objetivo es, entonces, determinar una configuración de piezas para completar el cuadrado $(n,k)$.
+Para esto, tendrás que implementar algunas funciones que simplificarán enormemente la resolución del problema.
+
+
 \end{problemDescription}
 
-\subsection*{Tarea}
-
-Debes implementar la función \verb+cuadrado+, que determina para un $n$ si es posible construir un cuadrado con un juego de $n-$dominó; no se pide que los lados sumen lo mismo, sólo se pide saber si se puede armar un cuadrado como el de la figura \ref{f:valido} usando \textbf{todo} el juego de $n$-dominó.
-
-Además debes implementar la función \verb+validar+ que determina si un cuadrado cumple con la restricción de que todos los lados sumen lo mismo.
-Esto también implica verificar que las fichas correspondan a las del juego completo de $n$-dominó.
-Sin embargo, puedes asumir que el juego completo de $n-$dominó sí permite formar un cuadrado.
-
-Por último, debes implementar la función \verb+construir+ que para $n$ y $k$ construye, si es posible, un cuadrado $(n,k)$, y retorna \verb+true+ si es posible o \verb+false+ si no.
+\subsection*{Subtarea 1}
+La primera subtarea consiste en implementar la función \verb+cuadrado+ que determina para un $n$ si es posible formar un cuadrado con un $n$-dominó.
+En esta subtarea no importa la suma de los valores de cada lado, sólo se pide determinar si es posible formar un cuadrado válido usando todas las piezas del $n$-dominó.
 
 \begin{itemize}
  \item \verb+cuadrado(n)+
@@ -69,13 +71,25 @@ Por último, debes implementar la función \verb+construir+ que para $n$ y $k$ c
   \item \verb+n+: el juego de $n$-dominó.
   \item \emph{return}: un booleano con valor \verb+true+ si se puede formar un cuadrado, y \verb+false+ si no.
  \end{itemize}
+\end{itemize}
+
+\subsection*{Subtarea 2}
+La subtarea 2 consiste en implementar la \verb+validar+ que dado un cuadrado debe validar que este cumple con la restricción de que todos los lados sumen lo mismo.
+Esto también implica verificar que las fichas correspondan a las del juego completo de $n$-dominó.
+Sin embargo, puedes asumir que el juego completo de $n-$dominó sí permite formar un cuadrado.
+
+\begin{itemize}
  \item \verb+validar(n, d)+
  \begin{itemize}
   \item \verb+n+: el juego de $n$-dominó.
   \item \verb+d+: vector de $2f$ enteros, donde se guarda el orden de las fichas que forma el cuadrado.
   \item \emph{return}: un booleano con valor \verb+true+ si los cuatro lados suman lo mismo, y \verb+false+ si no.
  \end{itemize}
+\end{itemize}
 
+\subsection*{Subtarea 3, 4 y 5}
+En las subtareas 3, 4 y 5, debes implementar la función \verb+construir+ que para $n$ y $k$ construye, si es posible, un cuadrado $(n,k)$, y retorna \verb+true+ si es posible o \verb+false+ si no.
+\begin{itemize}
  \item \verb+construir(n, k, d)+
  \begin{itemize}
   \item \verb+n, k+: valores para $n,k$, que indican el cuadrado $(n,k)$ que se quiere construir.
