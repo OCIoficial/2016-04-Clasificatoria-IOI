@@ -7,19 +7,17 @@
 using namespace std;
 
 int suma(int, int, int d[]);
-int fichas(int);
 pair<int,int> pareja(int, int, int);
 
 bool cuadrado(int n) {
 	return (n-1) % 8 >= 6;
 }
 
-bool validar(int n, int d[]) {
+bool validar(int n, int f, int d[]) {
 	// Revisa que n es válido
 	if (!cuadrado(n))
 		return false;
 	// Revisa si los lados suman lo mismo
-	int f = fichas(n);
 	if (suma(n, f, d) < 0)
 		return false;
 	// Revisa que pieza[a][b] (a >= b) no se ha usado más de una vez
@@ -43,8 +41,8 @@ bool validar(int n, int d[]) {
 	return true;
 }
 
-bool construir(int n, int k, int d[]) {
-	int f = fichas(n);
+bool construir(int n, int k, int f, int d[]) {
+	// Posiciones por lado 2 * f / 4
 	int p = f / 2;
 	if (!cuadrado(n) || k < f / 4 * (n - 1) || k > (f / 4 + 4) * (n - 1))
 		return false;
@@ -171,10 +169,6 @@ pair<int,int> pareja(int a, int b, int n) {
 		return pair<int,int>(a-1, b+1);
 	else
 		return pair<int,int>(a+1, b-1);
-}
-
-int fichas(int n) {
-	return n * (n + 1) / 2;
 }
 
 int suma(int n, int f, int d[]) {

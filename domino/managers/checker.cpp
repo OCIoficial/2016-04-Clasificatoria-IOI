@@ -7,7 +7,7 @@
 using namespace std;
 
 bool fn_cuadrado(int n);
-bool fn_validar(int n, int d[]);
+bool fn_validar(int n, int f, int d[]);
 int fn_fichas(int n);
 int fn_sum(int n, int f, int d[]);
 bool eval_construir(int n, int k, int f, int d[]);
@@ -53,7 +53,7 @@ int main (int argc, char *argv[]) {
 	
 	fcorr.close();	// Unused
 	
-	int t, n, k, f, ld;
+	int t, n, k, f;
 	string raw_ans;
 	bool ans, feasible;
 	int *d;
@@ -73,9 +73,9 @@ int main (int argc, char *argv[]) {
 		return ans == fn_cuadrado(n) ? right_ans() : wrong_ans();
 		
 	case 2:
-		fin >> n >> ld;
-		d = new int[ld];
-		for (int i = 0; i < ld; i++)
+		fin >> n >> f;
+		d = new int[2 * f];
+		for (int i = 0; i < 2 * f; i++)
 			fin >> d[i];
 		ftest >> raw_ans;
 		if (raw_ans == "true")
@@ -84,11 +84,11 @@ int main (int argc, char *argv[]) {
 			ans = false;
 		else
 			return wrong_ans();
-		return ans == fn_validar(n, d) ? right_ans() : wrong_ans();
+		return ans == fn_validar(n, f, d) ? right_ans() : wrong_ans();
 		
 	case 3:
-		fin >> n >> k >> ld;
-		d = new int[ld];
+		fin >> n >> k >> f;
+		d = new int[2 * f];
 		ftest >> raw_ans;
 		if (raw_ans == "true")
 			ans = true;
@@ -96,9 +96,8 @@ int main (int argc, char *argv[]) {
 			ans = false;
 		else
 			return wrong_ans();
-		for (int i = 0; i < ld; i++)
+		for (int i = 0; i < 2 * f; i++)
 			ftest >> d[i];
-		f = fn_fichas(n);
 		feasible = fn_cuadrado(n) && k >= f / 4 * (n-1) && k <= (f / 4 + 1) * (n-1);
 		if (ans != feasible)
 			return wrong_ans();
@@ -113,11 +112,10 @@ bool fn_cuadrado(int n) {
 	return (n-1) % 8 >= 6;
 }
 
-bool fn_validar(int n, int d[]) {
+bool fn_validar(int n, int f, int d[]) {
 	if (!fn_cuadrado(n))
 		return false;
 	
-	int f = n * (n + 1) / 2;
 	if (fn_sum(n, f, d) < 0)
 		return false;
 	
@@ -162,7 +160,7 @@ int fn_sum(int n, int f, int d[]) {
 }
 
 bool eval_construir(int n, int k, int f, int d[]) {
-	if (!fn_validar(n, d) || k != fn_sum(n, f, d)) {
+	if (!fn_validar(n, f, d) || k != fn_sum(n, f, d)) {
 		return false;
 	}
 	return true;
