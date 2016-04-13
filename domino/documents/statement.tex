@@ -8,7 +8,7 @@
 \title{Dominó}
 
 \begin{document}
-\begin{problemDescription}
+\maketitle
 % Un juego completo de fichas de dominó consiste en un conjunto de piezas rectangulares de $2\times1$, divididas en dos cuadrados, donde cada mitad tiene un número entre 0 y $n-1$, donde habitualmente $n$ es 7.
 Un juego de fichas de dominó consiste en un conjunto de piezas rectangulares de $2\times1$, donde cada mitad contiene un número entre 0 y $n-1$. 
 % En el set del dominó habitual $n$ es igual 7.
@@ -59,7 +59,6 @@ Tu objetivo es, entonces, determinar una configuración de piezas para completar
 Para esto, tendrás que implementar algunas funciones que simplificarán enormemente la resolución del problema.
 
 
-\end{problemDescription}
 
 \subsection*{Subtarea 1}
 La primera subtarea consiste en implementar la función \verb+cuadrado+ que determina para un $n$ si es posible formar un cuadrado con un $n$-dominó.
@@ -74,9 +73,10 @@ En esta subtarea no importa la suma de los valores de cada lado, sólo se pide d
 \end{itemize}
 
 \subsection*{Subtarea 2}
-La subtarea 2 consiste en implementar la función \verb+validar+ que dado un cuadrado debe validar que este cumple con la restricción de que todos los lados sumen lo mismo.
+La subtarea 2 consiste en implementar la función \verb+validar+ que dada la especificación de un cuadrado formado con un $n$-dominó y un valor $k$ debe verificar que este cumple con la restricción de que todos los lados sumen lo mismo.
 Esto también implica verificar que las fichas correspondan a las del juego completo de $n$-dominó.
-Sin embargo, puedes asumir que el juego completo de $n$-dominó sí permite formar un cuadrado.
+Debes asumir que el cuadrado especificado es válido.
+En particular para el $n$-dominó entregado es posible formar un cuadrado válido.
 
 \begin{itemize}
  \item \verb+bool validar(int n, int d[])+
