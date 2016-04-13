@@ -43,33 +43,55 @@ La primera subtarea consiste en determinar si es posible llevar al personaje des
 En esta subtarea no es importante el tiempo que toma mover al personaje.
 
 \begin{itemize}
-	\item \verb+boolean es_posible(bool[][] rocas, int N, int xi, int yi, int xf, int yf)+:
+	\item \verb+bool posible(int N, bool rocas[100][100], int xi, int yi, int xf, int yf)+
 
 Esta función debe determinar si es posible para el laberinto especificado llevar al personaje desde la posición inicial a la final.
   Si es posible la función debe retornar \texttt{true}, en caso contrario debe retornar \texttt{false}.
   \begin{itemize}
-    \item \texttt{rocas}: Arreglo de dos dimensiones especificando las casillas del laberinto que contienen una roca.
-      Una posición con \texttt{false} corresponde a una casilla vacía. Una posición con \texttt{true} corresponde a una casilla con una roca.
-    \item \texttt{N}: Tamaño de la grilla.
-    \item \texttt{xi}: Coordenada $x$ de la posición inicial.
-    \item \texttt{yi}: Coordenada $y$ de la posición inicial.
-    \item \texttt{xf}: Coordenada $x$ de la posición final.
-    \item \texttt{yf}: Coordenada $y$ de la posición final.
+    \item \verb+N+: Tamaño de la grilla.
+    \item \verb+rocas+: Arreglo de dos dimensiones especificando las casillas del laberinto que contienen una roca.
+      Si \verb+rocas[x][y]+ guarda el valor \verb+true+ significa que hay una roca en la casilla $(x,y)$.
+      En aso contrario, si \verb+rocas[x][y]+ guarda el valor \verb+true+ significa que la casilla $(x,y)$ está vacía.
+      Este arreglo es de tamaño $100\times 100$, pero solo las posiciones correspondientes a las primeras $N\times N$ casillas tienen información relevante.
+    \item \verb+xi+: Coordenada $x$ de la posición inicial.
+    \item \verb+yi+: Coordenada $y$ de la posición inicial.
+    \item \verb+xf+: Coordenada $x$ de la posición final.
+    \item \verb+yf+: Coordenada $y$ de la posición final.
   \end{itemize}
 \end{itemize}
+
+Se probarán varios casos con esta función donde $10 \leq N\leq 100$.
 
 \subsection*{Subtarea 2 (50pts)}
 En esta subtarea debe encontrarse el mínimo tiempo en que es posible llevar al personaje desde la posición inicial a la final.
 
 \begin{itemize}
-	\item \verb+int minimo(bool[][] rocas, int N, int xi, int yi, int xf, int yf)+:
+	\item \verb+int minimo(int N, bool rocas[100][100], int xi, int yi, int xf, int yf)+
 
 	Esta función debe retornar un entero correspondiente a la mínima cantidad de tiempo en que es posible llevar al personaje desde la posición inicial a la final.
   En caso de no ser posible la función debe retornar $-1$.
-  Los parámetros de la función son los mismos que los de \verb+es_posible+.
+  Los parámetros de la función son los mismos que los de \verb+posible+.
 \end{itemize}
 
+\subsection*{Detalles de implementación}
+Debes enviar exactamente un archivo, llamado \verb+hielo.cpp+.
+Este archivo deberá implementar todas las funciones descritas.
+Si solo haz implementado una de las funciones la otra debe también estar presente y puedes dejarla vacía.
+El archivo \verb+hielo.cpp+ debe también incluir el header \verb+hielo.h+.
+
 \subsection*{Grader de Ejemplo}
+Se provee un \emph{grader} junto algunos archivos de prueba para que puedas testear tu solución.
+El grader lee de la entrada estándar en el siguiente formato.
+
+La primera línea contiene dos enteros $T$ y $N$ correspondientes a la subtarea que se quiere resolver y el tamaño de la grilla.
+El número $T$ puede ser 1 o 2.
+La siguiente linea contiene cuatro enteros $xi$, $yi$, $xf$ y $yf$.
+Correspondientes a las coordenadas de la casilla inicial y la final.
+Las siguientes $N$ líneas contienen la descripción de las posiciones de las rocas en la grilla.
+Cada línea contiene $N$ enteros separados por espacio.
+Estos enteros pueden ser 0 o 1.
+Un valor igual a 0 significa que la casilla no contiene una roca y un valor igual a 1 significa que la casilla si contiene una roca.
+
 
 \end{document}
 

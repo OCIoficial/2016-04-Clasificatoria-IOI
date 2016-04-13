@@ -19,19 +19,19 @@ int main() {
   int xi, yi, xf, yf;
   scanf("%d%d%d%d", &xi, &yi, &xf, &yf);
 
-  vector<vector<bool> > roca(N, vector<bool>(N));
+  bool rocas[100][100];
   for (int i = 0; i < N; ++i) {
     for (int j = 0; j < N; ++j) {
       int b;
       scanf("%d", &b);
-      roca[j][i] = b;
+      rocas[j][i] = b;
     }
   }
 
   if (T == 1)
-    printf(posible(roca, N, xi, yi, xf, yf) ? "true\n" : "false\n");
+    printf(posible(N, rocas, xi, yi, xf, yf) ? "true\n" : "false\n");
   else if (T == 2)
-    printf("%d\n", minimo(roca, N, xi, yi, xf, yf));
+    printf("%d\n", minimo(N, rocas, xi, yi, xf, yf));
   else
     exit(1);
 

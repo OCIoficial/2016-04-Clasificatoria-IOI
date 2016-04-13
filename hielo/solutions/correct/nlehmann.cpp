@@ -15,28 +15,27 @@ using namespace std;
 typedef tuple<int, int, int> ti;
 
 
-bool posible(vector<vector<bool> > &roca, int N, int xi, int yi, int xf, int yf) {
-  return minimo(roca, N, xi, yi, xf, yf) != -1;
+bool posible(int N, bool rocas[100][100], int xi, int yi, int xf, int yf) {
+  return minimo(N, rocas, xi, yi, xf, yf) != -1;
 }
-
-bool choca(const vector<vector<bool> > &roca, int x, int y) {
-  return x < 0 || x >= roca.size() || y < 0 || y >= roca.size() || roca[x][y];
+bool choca(int N, bool rocas[100][100], int x, int y) {
+  return x < 0 || x >= N || y < 0 || y >= N || rocas[x][y];
 }
 
 template<typename Fun>
-void vecinos(const vector<vector<bool> > &roca, int x, int y, Fun f) {
+void vecinos(int N, bool rocas[100][100], int x, int y, Fun f) {
   int dx[] = {-1, 0, 1, 0};
   int dy[] = { 0, 1, 0,-1};
 
   for (int i = 0; i < 4; ++i) {
     int cx = x, cy = y;
-    while (!choca(roca, cx+dx[i], cy+dy[i]))
+    while (!choca(N, rocas, cx+dx[i], cy+dy[i]))
       cx += dx[i], cy += dy[i];
     f(cx, cy, abs(cx-x) + abs(cy-y));
   }
 }
 
-int minimo(vector<vector<bool> > &roca, int N, int xi, int yi, int xf, int yf) {
+int minimo(int N, bool rocas[100][100], int xi, int yi, int xf, int yf) {
   priority_queue<ti, vector<ti>, greater<ti>> q;
   vector<vector<int> > dist(N, vector<int>(N, INT_MAX));
   q.push(make_tuple(0, xi, yi));
@@ -52,7 +51,7 @@ int minimo(vector<vector<bool> > &roca, int N, int xi, int yi, int xf, int yf) {
 
     if (d > dist[x][y])
       continue;
-    vecinos(roca, x, y, [&](int vx, int vy, int vd) {
+    vecinos(N, rocas, x, y, [&](int vx, int vy, int vd) {
         if (d + vd < dist[vx][vy])
           q.push(make_tuple(d + vd, vx, vy)), dist[vx][vy] = d + vd;
       });
