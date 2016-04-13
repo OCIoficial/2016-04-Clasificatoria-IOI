@@ -8,17 +8,17 @@
 \maketitle
 
 Cada cuatro años la Organización de Cine Independiente (OCI) destina un día para que sus integrantes puedan devolver las películas que han arrendado.
-Como esta instancia se organiza solo cada cuatro años la fila que se arma es extremadamente larga.
-Es por esto que las personas en la fila deben esperar horas hasta poder ser atendidos.
+Como esta instancia se organiza solo cada cuatro años, la fila que se arma cada vez es extremadamente larga.
+Es por esto que las personas en la fila deben esperar horas hasta poder ser atendidas.
 
-La fila esta conformada por $N$ personas.
+% La fila esta conformada por $N$ personas.
 Dependiendo de la cantidad de películas que tiene que devolver, cada persona tendrá un tiempo de atención distinto.
 Esta información es conocida de antemano.
 El tiempo que una persona debe esperar en la fila es igual a la suma de los tiempos de atención de las personas delante de ella.
 
 Este año toda la gente ha llegado muy temprano y se encuentra formada en una gran fila fuera de las dependencias de la OCI.
 Antes de abrir las puertas, un trabajador de la OCI anuncia que este año será posible atender a los asistentes paralelamente en dos filas y por lo tanto es necesario formar una nueva.
-Para evitar conflictos, el trabajador propone que en el mismo orden en que están formados cada persona elija si quedarse en la fila actual o cambiarse al final de la nueva fila.
+Para evitar conflictos, el trabajador propone que en el mismo orden en que están formados, cada persona elija si quedarse en la fila actual o cambiarse al final de la nueva fila.
 Cada persona quiere minimizar el tiempo que estará en la fila y se cambiará de fila solo si eso significa que esperará estrictamente menos tiempo.
 El tiempo en que las personas se cambian de fila es irrelevante.
 Tu tarea es encontrar para cada persona cuanto tiempo tendrá que esperar en su fila luego de que las dos filas estén armadas.
@@ -29,13 +29,13 @@ La primera línea contiene un entero $N$ correspondiente al número de personas.
 La siguiente línea contiene $N$ enteros describiendo la fila inicial.
 Cada número describe a una persona.
 Las personas son identificadas con un número de 1 a $N$ en este mismo orden.
-El número $i$-ésimo corresponde al tiempo en que tardan en atender a la persona número $i$.
+El número $i$-ésimo corresponde al tiempo de atención de la persona número $i$.
 \end{inputDescription}
 
 \begin{outputDescription}
   La salida consiste en varias líneas.
   Cada línea describe a un persona luego de que las dos filas se hayan formado.
-  La línea $i$-ésima debe contener el tiempo que deberá esperar la persona número $i$, es decir, la suma de todos los tiempos de atención de las personas delante de ella en su fila final.
+  La línea $i$-ésima debe contener el tiempo que deberá esperar la persona número $i$ en su fila final, es decir, la suma de todos los tiempos de atención de las personas delante de ella.
 \end{outputDescription}
 % La figura de abajo muestra una fila de ejemplo con 5 personas antes de dividirse.
 % El número dentro de las cajas corresponde al tiempo en que se demorarán en atender a cada persona.
