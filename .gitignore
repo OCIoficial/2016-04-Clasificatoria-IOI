@@ -33,3 +33,4 @@ TAGS
 *.class
 checker
 *fdb_latexmk
+*.pdf

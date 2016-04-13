@@ -73,12 +73,12 @@ En esta subtarea no importa la suma de los valores de cada lado, sólo se pide d
  \end{itemize}
 \end{itemize}
 
-Para esta subtarea se probará la función \verb+duadrado+ con varios casos donde $N\leq 1000$ (25pts).
+Para esta subtarea se probará la función \verb+cuadrado+ con varios casos donde $N\leq 1000$ (25pts).
 
 \subsection*{Subtarea 2 (20 pts)}
-La subtarea 2 consiste en implementar la función \verb+validar+ que dada la especificación de un cuadrado formado con un $n$-dominó debe verificar que este cumple con la restricción de que todos los lados sumen lo mismo.
+La subtarea 2 consiste en implementar la función \verb+validar+ que dada la especificación de un cuadrado formado por fichas de un $n$-dominó debe verificar que este cumple con la restricción de que todos los lados sumen lo mismo.
 Esto también implica verificar que las fichas usadas correspondan a las del $n$-dominó, es decir, cada ficha es usada exactamente una vez.
-Debes asumir que para el $n$-dominó entregado es posible formar un cuadrado válido, es decir, \verb+cuadrado(n)+ retorna \verb+true+.
+Puedes asumir que para el $n$-dominó entregado es posible formar un cuadrado válido, es decir, \verb+cuadrado(n)+ retorna \verb+true+.
 
 \begin{itemize}
  \item \verb+bool validar(int n, int f, int fichas[])+
@@ -93,8 +93,8 @@ Debes asumir que para el $n$-dominó entregado es posible formar un cuadrado vá
 Para esta subtarea se probará la función \verb+validar+ con varios casos donde $N\leq 1000$ (20pts).
 
 \subsection*{Subtarea 3 y 4}
-Para las subtareas 3, 4 y 5, debes implementar la función \verb+construir+ que para un $n$ y un $k$ dados construye un cuadrado $(n,k)$ en caso de ser posible.
-Debes asumir que para el $n$-dominó entregado es posible formar un cuadrado válido, es decir, \verb+cuadrado(n)+ retorna \verb+true+.
+Para las subtareas 3 y 4, debes implementar la función \verb+construir+ que para un $n$ y un $k$ dados construye un cuadrado $(n,k)$ en caso de ser posible.
+Puedes asumir que para el $n$-dominó entregado es posible formar un cuadrado válido, es decir, \verb+cuadrado(n)+ retorna \verb+true+.
 No obstante, puede que ser posible que para el valor de $k$ no sea posible formar un cuadrado $(n,k)$.
 Si es posible formar un cuadrado $(n,k)$ la función debe retornar \verb+true+, en caso contrario debe retornar \verb+false+.
 \begin{itemize}
@@ -103,16 +103,36 @@ Si es posible formar un cuadrado $(n,k)$ la función debe retornar \verb+true+, 
   \item \verb+n, k+: valores que indican el cuadrado $(n,k)$ que se quiere construir.
   \item \verb+f+: indica la cantidad de fichas que tiene el $n$-dominó.
   \item \verb+d+: arreglo de enteros de tamaño $2\times\texttt{f}$ donde debes guardar la especificación del cuadrado $(n,k)$. Más adelante se detalla la forma de especificar el cuadrado.
-    Tu función debe llenar este arreglo. Su contenido será revisado solo en el caso en que la función retorne \verb+true+.
+    Tu función debe llenar este arreglo. Su contenido será revisado sólo en el caso en que la función retorne \verb+true+.
   \item \emph{return}: un booleano con valor \verb+true+ si se puede formar un cuadrado $(n,k)$, y \verb+false+ si no.
  \end{itemize}
 \end{itemize}
 
-Para la subtarea 3 se probará la función \verb+validar+ con varios casos donde $N\leq 17$ (20pts).
-Para la subtarea 4 se probará la función \verb+validar+ con varios casos donde $N\leq 10000$ (25pts).
+Para la subtarea 3 se probará la función \verb+validar+ con varios casos donde $N\leq 7$ (20pts).
+Para la subtarea 4 se probará la función \verb+validar+ con varios casos donde $N\leq 1000$ (25pts).
 
-\paragraph{Convención sobre el formato del arreglo \emph{d}}
-La función \verb+validar+ recibe como parámetro un arreglo de enteros \verb+fichas+ donde se especifica un cuadrado formado con las fichas de un $n$-domino.
+\subsection*{Detalles de implementación}
+Debes enviar exactamente un archivo, llamado \verb+domino.cpp+.
+Este archivo deberá implementar todas las funciones descritas.
+Si solo has implementado una de las funciones la otra debe también estar presente y puedes dejarla vacía.
+El archivo \verb+domino.cpp+ debe también incluir el header \verb+domino.h+.
+
+\subsection*{Grader de Ejemplo}
+Se provee un \emph{grader} junto con algunos archivos de prueba para que puedas testear tu solución.
+El grader lee de la entrada estándar en el siguiente formato.
+
+La primera línea contiene un entero $T$ correspondiente a la subtarea que se quiere resolver.
+El número $T$ puede ser 1, 2 o 3.
+\begin{itemize}
+ \item Si $T$ es 1, solo sigue una línea, que contiene un entero $N$ correspondiente al tamaño del $N$-dominó.
+ \item Si $T$ es 2, siguen dos líneas.
+La primera contiene dos enteros $N$ y $F$, correspondientes al tamaño y el número de fichas del $N$-dominó respectivamente.
+La segunda línea contiene $2\times F$ enteros entre 0 y $N$, los valores del arreglo \emph{d} en el orden descrito abajo.
+ \item Si $T$ es 3, sigue una sola línea, que contiene tres enteros $N$, $K$ y $F$, donde $N$ y $K$ indican el tipo de cuadrado que se pide construir, y $F$ es el número de fichas del $N$-dominó.
+\end{itemize}
+
+\subsection*{Convención sobre el formato del arreglo \emph{d}}
+La función \verb+validar+ recibe como parámetro un arreglo de enteros \verb+fichas+ donde se especifica un cuadrado formado con las fichas de un $n$-dominó.
 De la misma forma \verb+construir+ debe llenar el arreglo \verb+fichas+ para especificar el cuadrado que construye.
 A continuación se detalla la forma en que un cuadrado es especificado en el arreglo \verb+fichas+.
 
@@ -121,7 +141,7 @@ Por ejemplo, como un $7$-dominó tiene 28 fichas puede ser guardado en un arregl
 El arreglo es tal que dos posiciones seguidas corresponden a una ficha.
 La posición 0 y la 1 corresponden a la primera ficha, la 2 y la 3 a la segunda ficha y así hasta la última ficha que corresponde a las posiciones $2\times f-2$ y $2\times f-1$ en el arreglo.
 Las fichas en el arreglo se especifican en sentido horario partiendo desde la esquina superior izquierda.
-Por ejemplo, el cuadrado mostrado en la Figura~\ref{f:cuadrado7} puede ser guardada un arreglo de la siguiente manera.
+Por ejemplo, el cuadrado mostrado en la Figura~\ref{f:cuadrado7} puede ser guardado un arreglo de la siguiente manera.
 
 \begin{center}
 % \def\arraystretch{1}
