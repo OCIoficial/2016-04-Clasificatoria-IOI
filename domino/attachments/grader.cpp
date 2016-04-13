@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-	int t, n, k, ld;
+	int t, n, k, f;
 	int *d;
 	
 	cin >> t;
@@ -18,19 +18,19 @@ int main() {
 		return 0;
 		
 	case 2:
-		cin >> n >> ld;
-		d = new int[ld];
-		for (int i = 0; i < ld; i++)
+		cin >> n >> f;
+		d = new int[2 * f];
+		for (int i = 0; i < 2 * f; i++)
 			cin >> d[i];
-		cout << (validar(n, d) ? "true" : "false") << endl;
+		cout << (validar(n, f, d) ? "true" : "false") << endl;
 		return 0;
 		
 	case 3:
-		cin >> n >> k >> ld;
-		d = new int[ld];
-		cout << (construir(n, k, d) ? "true" : "false") << endl;
-		for (int i = 0; i < ld; i++)
-			cout << d[i] << (i+1 != ld ? " " : "\n");
+		cin >> n >> k >> f;
+		d = new int[2 * f];
+		cout << (construir(n, k, f, d) ? "true" : "false") << endl;
+		for (int i = 0; i < 2 * f; i++)
+			cout << d[i] << (i + 1 != 2 * f ? " " : "\n");
 		return 0;
 	default:
 		return 1;

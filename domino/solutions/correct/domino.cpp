@@ -14,12 +14,11 @@ bool cuadrado(int n) {
 	return (n-1) % 8 >= 6;
 }
 
-bool validar(int n, int d[]) {
+bool validar(int n, int f, int d[]) {
 	// Revisa que n es válido
 	if (!cuadrado(n))
 		return false;
 	// Revisa si los lados suman lo mismo
-	int f = fichas(n);
 	if (suma(n, f, d) < 0)
 		return false;
 	// Revisa que pieza[a][b] (a >= b) no se ha usado más de una vez
@@ -43,8 +42,7 @@ bool validar(int n, int d[]) {
 	return true;
 }
 
-bool construir(int n, int k, int d[]) {
-	int f = fichas(n);
+bool construir(int n, int k, int f, int d[]) {
 	int p = f / 2;
 	if (!cuadrado(n) || k < f / 4 * (n - 1) || k > (f / 4 + 1) * (n - 1))
 		return false;
