@@ -115,13 +115,14 @@ public class sbarbieri {
 		int[] resp = reca(N,0,1,0,50);
 		System.out.println(Arrays.toString(resp));
 		//Para dibujar en latex usando Tikz:
-		int X = 0; int Y = 0;
-		PrintWriter pw = new PrintWriter(new FileWriter("curvita.txt"));
-		for (int i = 0; i < 1000; i++) {
-			int[] r = reca(i,0,1,0,10);
-			pw.println("\\draw[thick,-,red] ("+X+","+Y+") to ("+r[0]+","+r[1]+");");
-			X = r[0]; Y = r[1];
-		}
-		pw.close();
+		//int X = 0; int Y = 0;
+		//PrintWriter pw = new PrintWriter(new FileWriter("curvita.txt"));
+		//for (int i = 0; i < 1000; i++) {
+			//int[] r = reca(i,0,1,0,10);
+			//pw.println("\\draw[thick,-,red] ("+X+","+Y+") to ("+r[0]+","+r[1]+");");
+			//pw.println("\\draw[thick,-,red] ("+X+","+Y+") to ("+r[0]+","+r[1]+");");
+			//X = r[0]; Y = r[1];
+		//}
+		//pw.close();
 	}
 }
