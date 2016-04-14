@@ -3,7 +3,7 @@
 \usepackage{lipsum}
 
 % \usepackage{icpc_problem} % or wherever this package is stored
-\usepackage[spanish]{babel}
+% \usepackage[spanish]{babel}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 \usepackage{amssymb}
 \usepackage{float}
@@ -34,13 +34,9 @@ Por fortuna su amiga Bulnelman planea ayudarlo a realizar esta tarea.
 Bulnelman estudió detenidamente el camino del dragón y descubrió que este puede ser descrito de manera simple.
 
 \begin{wrapfigure}{r}{0.5\textwidth}
-% \begin{figure}[b]
   \centering
-	% \begin{center}
-			\include{dragoncito}
-		\caption{Primeros $2^{12}-1$ pasos de la curva del dragón}
-	% \end{center}
-% \end{figure}
+  \include{dragoncito}
+  \caption{Primeros $2^{12}-1$ pasos de la curva del dragón}
 \end{wrapfigure}
 
 El verdadero camino del dragón es un camino infinito, pero a continuación hablaremos de varios caminos finitos que llamaremos también caminos del dragón.
@@ -93,35 +89,6 @@ A continuación se muestra un ejemplo donde se ejecutan las acciones para la sec
 \begin{minipage}{0.5\textwidth}
 \begin{center}
 		\begin{tikzpicture}
-	% \begin{scope}[scale = 0.6, shift={(-15,0)},rotate=0]
-	% \draw[thick,red] (0,0) --(0,1);
-	% \draw[fill = black] (0,0) circle (0.1);
-	% \end{scope}
-	% \begin{scope}[scale = 0.6, shift={(-12,0)},rotate=0]
-	% \draw[thick,red] (0,0) --(0,1) --(1,1);
-	% \draw[fill = black] (0,0) circle (0.1);
-	% \end{scope}
-	% \begin{scope}[scale = 0.6, shift={(-9,0)},rotate=0]
-	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0);
-	% \draw[fill = black] (0,0) circle (0.1);
-	% \end{scope}
-	% \begin{scope}[scale = 0.6, shift={(-6,0)},rotate=0]
-	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0);
-	% \draw[fill = black] (0,0) circle (0.1);
-	% \end{scope}
-	% \begin{scope}[scale = 0.6, shift={(-3,0)},rotate=0]
-	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1);
-	% \draw[fill = black] (0,0) circle (0.1);
-	% \end{scope}
-	% \begin{scope}[scale = 0.6, shift={(0,0)},rotate=0]
-	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1);
-	% \draw[fill = black] (0,0) circle (0.1);
-	% \end{scope}
-	% \begin{scope}[scale = 0.6, shift={(3,0)},rotate=0]
-	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1)--(1,-2);
-	% \draw[fill = black] (0,0) circle (0.1);
-	% \end{scope}
-	% \begin{scope}[scale = 1, shift={(0,0)},rotate=0]
     \draw[step=1, lightgray, very thin] (2.5,2.5) grid (-2.5,-2.5);
     \foreach \i in {-2,-1,1,2}
        \draw (\i, -1pt) -- (\i, 1pt) node[anchor=north, scale=0.7]{$\i$};
@@ -130,8 +97,8 @@ A continuación se muestra un ejemplo donde se ejecutan las acciones para la sec
   \draw[thin] (0,-2.5) -- (0,2.5);
   \draw[thin] (-2.5,0) -- (2.5, 0);
 	\draw[very thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1)--(1,-2) -- (2,-2);
-	% \draw[fill = black] (0,0) circle (0.1);
-	\end{scope}
+	\draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
 	\end{tikzpicture}
 \end{center}
 \end{minipage}

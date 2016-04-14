@@ -1,7 +1,7 @@
 \documentclass{oci}
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}
-\usepackage{subcaption}
+\usepackage{caption}
 \usepackage{lipsum}
 \usepackage[spanish]{babel}
 
@@ -9,139 +9,153 @@
 
 \begin{document}
 \maketitle
-
 % Un juego completo de fichas de dominó consiste en un conjunto de piezas rectangulares de $2\times1$, divididas en dos cuadrados, donde cada mitad tiene un número entre 0 y $n-1$, donde habitualmente $n$ es 7.
-Un juego de fichas de dominó consiste en un conjunto de piezas rectangulares de $2\times1$, donde cada mitad contiene un número entre 0 y $n-1$. 
+Un juego de dominó tradicional consiste en un conjunto de fichas rectangulares de $2\times1$, donde cada mitad contiene un número entre 0 y $6$. 
+Cada combinación de pares de números aparece exactamente una vez, pero sin considerar el orden.
+Por ejemplo, la ficha 1--6 es la misma que la 6--1.
+Esto da un total de 28 fichas para el dominó tradicional.
+% Cada ficha del dominó puede ser representada con un par de enteros $(a,b)$ donde $0\leq a,b\leq 6$ y además el orden no importa, por e, la ficha
+
+Dado un entero $n$ mayor que cero, el juego de dominó puede ser generalizado para que cada pieza contenga números entre 0 y $n-1$.
+En este dominó generalizado cada combinación de pares de números también aparece exactamente una vez.
+Por ejemplo para $n=2$ las fichas son 0--0, 0--1 y 1--1.
 % En el set del dominó habitual $n$ es igual 7.
-Llamaremos un $n$-dominó al juego de fichas donde el valor correspondiente es $n$.
-Por ejemplo, el juego de dominó normal es un $7$-dominó y sus piezas tienen valores entre 0 y 6.
-Además, en un $n$-dominó cada combinación de pares de números está presente exactamente una vez (1--3 y 3--1 son la misma pieza).
-Por ejemplo, un \textbf{7-dominó} consiste en \textbf{28 piezas}.
+Llamaremos un $n$-dominó al juego donde cada ficha contiene números entre 0 y $n-1$, y cada combinación de pares de números aparece exactamente una vez.
+% Por ejemplo, el dominó tradicional es un $7$-dominó y el conjunto de fichas (0--0, 0--1, 1--1) conforman un 2-dominó.
+Por ejemplo, el dominó tradicional es un $7$-dominó.
+Por otro lado, el conjunto (0--0, 0--2, 2--2) está formado por fichas con valores entre 0 y 2, pero no conforman un 3-dominó, pues hay fichas que faltan.
+% Considere, que en un $n$-dominó cada combinación de pares de números está presente exactamente una vez (1--3 y 3--1 son la misma ficha).
+% Por ejemplo, un 2-dominó consiste en 3 piezas, 0--0, 0--1 y 1--1.
+% Por ejemplo, un 7-dominó consiste en 28 piezas.
 
 Un $n$-dominó es tan versátil como una baraja de cartas, en cuanto a que ambos permiten jugar una gran variedad de juegos.
-Uno de estos es el del cuadrado\footnote{Inspirado en \emph{Matemáticas Recreativas} de Y. I. Perelman}.
+Uno de estos es el del cuadrado. %\footnote{Inspirado en \emph{Matemáticas Recreativas} de Y. I. Perelman}.
 En el juego del cuadrado se te entrega un $n$-dominó y un valor $k$.
-El objetivo del juego es formar un cuadrado usando todas las piezas del $n$-dominó, de forma que para cada lado la suma de todos los valores en él sea $k$.
+El objetivo del juego es construir un cuadrado usando todas las fichas que conforman el $n$-dominó, de forma que para cada lado la suma de todos los valores en las fichas sea $k$.
 % Este juego\footnote{Inspirado en \emph{Matemáticas Recreativas} de Y. I. Perelman} consiste en formar un cuadrado usando todas las piezas de un $n$-dominó,  donde el número de piezas verticales y horizontales es el mismo (fig. \ref{f:cuadrados}), tal que para cada lado, la suma de los valores en él sea $k$.
 % En este juego está permitido poner juntos dos cuadrados de diferente valor (a diferencia del clásico juego de dominó).
-A un cuadrado formado con un $n$-dominó de forma que los lados sumen $k$ lo llamaremos un cuadrado $(n,k)$.
+A un cuadrado construido con todas las fichas de un $n$-dominó en que todos los lados sumen $k$ lo llamaremos un cuadrado $(n,k)$.
 
-Para formar un cuadrado válido la cantidad de pieza verticales y horizontales debe ser la misma.
+Para construir un cuadrado válido la cantidad de fichas verticales y horizontales debe ser la misma.
 A continuación se muestra una imagen de un cuadrado inválido y uno válido.
-\begin{figure}[h!]
- \begin{subfigure}[b]{0.45\textwidth}
+El cuadrado de la izquierda es inválido pues los lados horizontales están formados por una ficha completa y dos mitades, mientras que los verticales por dos fichas completas.
+El cuadrado de la derecha es válido y cada lado, horizontal o vertical, está formado por dos fichas completas y una mitad.
+Notar que todas las fichas están contenidas en un solo lado salvo por las fichas de las esquinas que pertenecen a dos lados simultáneamente.
+
+
+% \begin{figure}[h!]
+ \begin{minipage}[b]{0.5\textwidth}
   \centering
   \input{domino1}
-  \caption{Cuadrado inválido}
-  \label{f:invalido}
- \end{subfigure}
- \begin{subfigure}[b]{0.45\textwidth}
+  \captionof*{figure}{Cuadrado inválido}
+  % \label{f:invalido}
+\end{minipage}
+~
+\begin{minipage}[b]{0.5\textwidth}
   \centering
   \input{domino2}
-  \caption{Cuadrado de lado 5}
-  \label{f:valido}
- \end{subfigure}
- \caption{Un cuadrado válido y uno inválido.}
- \label{f:cuadrados}
-\end{figure}
-Notar que no para cualquier valor de $n$ es posible formar un cuadrado con un $n$-dominó.
-Por ejemplo, el $2$-dominó está formado por 3 piezas (0--0, 0--1 y 1--1) y no es posible armar un cuadrado con ellas.
-Por otro lado, para un $n$-dominó donde sí es posible formar un cuadrado no necesariamente es posible armar un cuadrado $(n,k)$ para cualquier $k$.
+  \captionof*{figure}{Cuadrado válido}
+  % \label{f:valido}
+\end{minipage}
+ % \caption{Un cuadrado válido y uno inválido.}
+ % \label{f:cuadrados}
+% \end{figure}
+
+Para un valor $n$ puede ser el caso que dada la cantidad de fichas que conforman un $n$-dominó sea imposible construir un cuadrado válido.
+Por ejemplo, el $2$-dominó está formado por 3 fichas (0--0, 0--1 y 1--1) y no es posible construir un cuadrado válido con ellas.
+De hecho el primer $n$-dominó con el cuál es posible construir un cuadrado válido es el $7$-dominó.
+Por otro lado, para un $n$-dominó donde sí es posible construir un cuadrado válido no necesariamente es posible construir un cuadrado $(n,k)$ para cualquier $k$.
 Por ejemplo, para el $7$-dominó la suma de los lados siempre será menor que 90, y por lo tanto no es posible formar un cuadrado $(7,90)$.
 
-\begin{figure}[ht]
+A continuación se muestra la imagen de un cuadrado formado con un $7$-dominó donde la suma de cada lado es 45, es decir, es un cuadrado $(7,45)$.
+Notar que los números en las esquinas deben ser considerados dos veces.
+Por ejemplo, el 3 de la ficha 3--4 es contabilizado tanto en la suma del lado superior como en la suma del lado derecho.
+Este es uno de los cuadrados $(7,45)$ posibles. En general, para un $n$ y un $k$ existen varias formas de construir un cuadrado $(n,k)$.
+
+\begin{minipage}{\textwidth}
  \centering
  \input{domino3}
- \caption{Un cuadrado $(7,45)$. Notar que cada lado suma 45.}
- \label{f:cuadrado7}
-\end{figure}
+ \captionof*{figure}{Un cuadrado $(7,45)$. Notar que cada lado suma 45.}
+ % \label{f:cuadrado7}
+\end{minipage}
 
-Tu objetivo es, entonces, determinar una configuración de piezas para completar el cuadrado $(n,k)$.
+Dado un valor $n$ y un valor $k$ el objetivo de este problema es construir un cuadrado $(n,k)$.
 Para esto, tendrás que implementar algunas funciones que simplificarán enormemente la resolución del problema.
 
 
 
 \subsection*{Subtarea 1 (25 pts)}
-La primera subtarea consiste en implementar la función \verb+cuadrado+ que determina para un $n$ si es posible formar un cuadrado con un $n$-dominó.
-En esta subtarea no importa la suma de los valores de cada lado, sólo se pide determinar si es posible formar un cuadrado válido usando todas las piezas del $n$-dominó.
+La primera subtarea consiste en implementar la función \verb+cuadrado+ que determina para un valor $n$ si es posible construir un cuadrado válido con un $n$-dominó.
+En esta subtarea no importa la suma de los valores de cada lado, sólo se pide determinar si es posible construir un cuadrado válido {\bf usando todas las fichas del $n$-dominó}.
 
 \begin{itemize}
  \item \verb+bool cuadrado(int n)+
  \begin{itemize}
   \item \verb+n+: indica el tamaño del $n$-dominó.
-  \item \emph{return}: un booleano con valor \verb+true+ si se puede formar un cuadrado, y \verb+false+ si no.
+  \item \verb+return+: la función debe retornar \verb+true+ si es posible construir un cuadrado válido o \verb+false+ en caso contrario.
  \end{itemize}
 \end{itemize}
 
-Para esta subtarea se probará la función \verb+cuadrado+ con varios casos donde $N\leq 1000$ (25pts).
+{\bf Restricciones}
+\begin{itemize}
+\item Para esta subtarea se probará la función \verb+cuadrado+ con varios casos donde $0< n\leq 1000$ (25pts).
+\end{itemize}
 
 \subsection*{Subtarea 2 (35 pts)}
-La subtarea 2 consiste en implementar la función \verb+validar+ que dada la especificación de un cuadrado formado por fichas de un $n$-dominó debe verificar que este cumple con la restricción de que todos los lados sumen lo mismo.
-Esto también implica verificar que las fichas usadas correspondan a las del $n$-dominó, es decir, cada ficha es usada exactamente una vez.
-Puedes asumir que para el $n$-dominó entregado es posible formar un cuadrado válido, es decir, \verb+cuadrado(n)+ retorna \verb+true+.
+La subtarea 2 consiste en implementar la función \verb+verificar+ que dada la especificación de un cuadrado construido con fichas de un $n$-dominó debe verificar que todos los lados de este sumen lo mismo.
+La función también debe verificar que todas las fichas que conforman el $n$-dominó sean usadas, es decir, no hay fichas que falten o que se repitan.
+En esta subtarea para el $n$-dominó entregado siempre será posible formar un cuadrado válido, es decir, \verb+cuadrado(n)+ retorna \verb+true+.
 
 \begin{itemize}
- \item \verb+bool validar(int n, int f, int fichas[])+
+ \item \verb+bool verificar(int n, int f, int fichas[])+
  \begin{itemize}
   \item \verb+n+: indica el tamaño del $n$-dominó.
-  \item \verb+f+: indica la cantidad de fichas que tiene el $n$-dominó.
-  \item \verb+fichas+: arreglo de enteros de tamaño $2\times\texttt{f}$ donde se especifica el cuadrado. Más adelante se detalla el formato en que el cuadrado debe ser especificado.
-  \item \emph{return}: un booleano con valor \verb+true+ si los cuatro lados suman lo mismo, y \verb+false+ si no.
+  \item \verb+f+: indica la cantidad de fichas que conforman el $n$-dominó.
+  \item \verb+fichas+: arreglo de enteros de tamaño $2\times\texttt{f}$ donde se especifica el cuadrado que hay que verificar. Más adelante se detalla el formato en que el cuadrado es especificado.
+  \item \verb+return+: la función debe retornar \verb+true+ si todos los lados del cuadrado especificado suman lo mismo y todas las fichas que conforman el $n$-dominó son utilizadas. 
+   En caso contrario debe retornar \verb+false+.
  \end{itemize}
 \end{itemize}
 
-Para esta subtarea se probará la función \verb+validar+ con varios casos donde $N\leq 1000$ (35pts).
+\paragraph{Restricciones}
+\begin{itemize}
+\item Para esta subtarea se probará la función \verb+verificar+ con varios casos donde $0 < n\leq 1000$ (35pts).
+\end{itemize}
 
 \subsection*{Subtareas 3 y 4 (40 pts)}
-Para las subtareas 3 y 4, debes implementar la función \verb+construir+ que para un $n$ y un $k$ dados construye un cuadrado $(n,k)$ en caso de ser posible.
-Puedes asumir que para el $n$-dominó entregado es posible formar un cuadrado válido, es decir, \verb+cuadrado(n)+ retorna \verb+true+.
-No obstante, puede que ser posible que para el valor de $k$ no sea posible formar un cuadrado $(n,k)$.
+Para las subtareas 3 y 4, debes implementar la función \verb+construir+ que recibe un valor $n$ y un valor $k$, y construye un cuadrado $(n,k)$ en caso de ser posible.
+En esta función parar el $n$-dominó entregado siempre será posible formar un cuadrado válido, es decir, \verb+cuadrado(n)+ retorna \verb+true+.
+No obstante, puede ser el caso que para el valor de $k$ no sea posible formar un cuadrado $(n,k)$.
 Si es posible formar un cuadrado $(n,k)$ la función debe retornar \verb+true+, en caso contrario debe retornar \verb+false+.
 \begin{itemize}
  \item \verb+bool construir(int n, int k, int f, int fichas[])+
  \begin{itemize}
   \item \verb+n, k+: valores que indican el cuadrado $(n,k)$ que se quiere construir.
-  \item \verb+f+: indica la cantidad de fichas que tiene el $n$-dominó.
-  \item \verb+d+: arreglo de enteros de tamaño $2\times\texttt{f}$ donde debes guardar la especificación del cuadrado $(n,k)$. Más adelante se detalla la forma de especificar el cuadrado.
-    Tu función debe llenar este arreglo. Su contenido será revisado sólo en el caso en que la función retorne \verb+true+.
-  \item \emph{return}: un booleano con valor \verb+true+ si se puede formar un cuadrado $(n,k)$, y \verb+false+ si no.
+  \item \verb+f+: indica la cantidad de fichas que conforman un $n$-dominó.
+  \item \verb+fichas+: arreglo de enteros de tamaño $2\times\texttt{f}$ donde debes guardar la especificación del cuadrado $(n,k)$. Más adelante se detalla la forma de especificar el cuadrado.
+    Tu función debe llenar este arreglo con la descripción de algún cuadrado $(n,k)$.
+Su contenido será revisado sólo en el caso de que la función retorne \verb+true+.
+  \item \verb+return+: la función debe retornar \verb+true+ si es posible formar un cuadrado $(n,k)$ o \verb+false+ en caso contrario.
  \end{itemize}
 \end{itemize}
 
-Para la subtarea 3 se probará la función \verb+validar+ con varios casos donde $N\leq 7$ (25pts).
-Para la subtarea 4 se probará la función \verb+validar+ con varios casos donde $N\leq 1000$ (15pts).
-
-\subsection*{Detalles de implementación}
-Debes enviar exactamente un archivo, llamado \verb+domino.cpp+.
-Este archivo deberá implementar todas las funciones descritas.
-Si solo has implementado una de las funciones la otra debe también estar presente y puedes dejarla vacía.
-El archivo \verb+domino.cpp+ debe también incluir el header \verb+domino.h+.
-
-\subsection*{Grader de Ejemplo}
-Se provee un \emph{grader} junto con algunos archivos de prueba para que puedas testear tu solución.
-El grader lee de la entrada estándar en el siguiente formato.
-
-La primera línea contiene un entero $T$ correspondiente a la subtarea que se quiere resolver.
-El número $T$ puede ser 1, 2 o 3.
+\paragraph{Restricciones}
 \begin{itemize}
- \item Si $T$ es 1, solo sigue una línea, que contiene un entero $N$ correspondiente al tamaño del $N$-dominó.
- \item Si $T$ es 2, siguen dos líneas.
-La primera contiene dos enteros $N$ y $F$, correspondientes al tamaño y el número de fichas del $N$-dominó respectivamente.
-La segunda línea contiene $2\times F$ enteros entre 0 y $N$, los valores del arreglo \emph{d} en el orden descrito abajo.
- \item Si $T$ es 3, sigue una sola línea, que contiene tres enteros $N$, $K$ y $F$, donde $N$ y $K$ indican el tipo de cuadrado que se pide construir, y $F$ es el número de fichas del $N$-dominó.
+\item Para la subtarea 3 se probará la función \verb+verificar+ con varios casos donde $n= 7$ (20pts).
+\item Para la subtarea 4 se probará la función \verb+verificar+ con varios casos donde $7 < n\leq 1000$ (20pts).
 \end{itemize}
 
-\subsection*{Convención sobre el formato del arreglo \emph{d}}
-La función \verb+validar+ recibe como parámetro un arreglo de enteros \verb+fichas+ donde se especifica un cuadrado formado con las fichas de un $n$-dominó.
+\subsection*{Convención sobre el formato del arreglo \emph{fichas}}
+La función \verb+verificar+ recibe como parámetro un arreglo de enteros \verb+fichas+ donde se especifica un cuadrado construido con las fichas de un $n$-dominó.
 De la misma forma \verb+construir+ debe llenar el arreglo \verb+fichas+ para especificar el cuadrado que construye.
 A continuación se detalla la forma en que un cuadrado es especificado en el arreglo \verb+fichas+.
 
-Si $f$ es la cantidad de fichas de un $n$-dominó el arreglo \verb+fichas+ es de tamaño $2\times f$.
-Por ejemplo, como un $7$-dominó tiene 28 fichas puede ser guardado en un arreglo de tamaño 56.
-El arreglo es tal que dos posiciones seguidas corresponden a una ficha.
+Si $f$ es la cantidad de fichas que conforman $n$-dominó el arreglo \verb+fichas+ es de tamaño $2\times f$.
+Por ejemplo, un cuadrado construido con un $7$-dominó debe ser especificado en un arreglo de tamaño 56, pues un $7$-dominó está conformado por 28 fichas.
+En el arreglo una ficha es almacenada en dos posiciones consecutivas.
 La posición 0 y la 1 corresponden a la primera ficha, la 2 y la 3 a la segunda ficha y así hasta la última ficha que corresponde a las posiciones $2\times f-2$ y $2\times f-1$ en el arreglo.
 Las fichas en el arreglo se especifican en sentido horario partiendo desde la esquina superior izquierda.
-Por ejemplo, el cuadrado mostrado en la Figura~\ref{f:cuadrado7} puede ser guardado un arreglo de la siguiente manera.
+Por ejemplo, el cuadrado (7,45) mostrado en la figura de más arriba puede ser almacenado en un arreglo de la siguiente manera.
 
 \begin{center}
 % \def\arraystretch{1}
@@ -199,5 +213,26 @@ Por ejemplo, el cuadrado mostrado en la Figura~\ref{f:cuadrado7} puede ser guard
 %   \score{20} Implementar la función construir, para $n \le 16$.
 %   \score{25} Implementar la función construir, para $n \le 1000$.
 % \end{scoreDescription}
+
+\subsection*{Detalles de implementación}
+Debes enviar exactamente un archivo, llamado \verb+domino.cpp+.
+Este archivo debe contener todas las funciones descritas.
+Si solo has implementado una de las funciones las otras deben también estar presente y puedes dejarlas vacías.
+El archivo \verb+domino.cpp+ debe incluir el header \verb+domino.h+.
+
+\subsection*{Grader de Ejemplo}
+Se provee un \emph{grader} junto con algunos archivos de prueba para que puedas testear tu solución.
+El grader lee de la entrada estándar en el siguiente formato.
+
+La primera línea contiene un entero $T$ correspondiente a la subtarea que se quiere resolver.
+El número $T$ puede ser 1, 2, 3 o 4.
+\begin{itemize}
+ \item Si $T$ es 1, solo sigue una línea, que contiene un entero $n$ correspondiente al tamaño del $n$-dominó.
+ \item Si $T$ es 2, siguen dos líneas.
+La primera contiene dos enteros $n$ y $f$, correspondientes al tamaño y el número de fichas del $n$-dominó respectivamente.
+La segunda línea contiene $2\times f$ enteros entre 0 y $n$, los valores del arreglo \verb+fichas+ en el formato descrito anteriormente.
+ \item Si $T$ es 3 o 4, sigue una sola línea. Esta línea contiene tres enteros $n$, $k$ y $f$, donde $n$ indica el tamaño del $n$-dominó, $k$ indica cuanto deben sumar los lados del cuadrado que se pide construir, y $f$ es el número de fichas que conforman el $n$-dominó.
+\end{itemize}
+
 
 \end{document}
