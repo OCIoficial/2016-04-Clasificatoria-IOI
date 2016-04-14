@@ -2,17 +2,16 @@
 
 
 bool cuadrado(int n) {
-	// Subtarea 1 se resuelve aquí, ¡no olvides cambiar la línea siguiente!
+	// Subtarea 1 se resuelve aquí.
 	return true;
 }
 
-bool validar(int n, int f, int fichas[]) {
-	// Subtarea 2 se resuelve aquí, ¡no olvides cambiar la línea siguiente!
+bool verificar(int n, int f, int fichas[]) {
+	// Subtarea 2 se resuelve aquí.
 	return true;
 }
 
 bool construir(int n, int k, int f, int fichas[]) {
-	// Subtareas 3, 4 y 5 se resuelven aquí, ¡no olvides cambiar la línea
-	// siguiente!
+	// Subtareas 3 y 4 se resuelven aquí.
 	return true;
 }

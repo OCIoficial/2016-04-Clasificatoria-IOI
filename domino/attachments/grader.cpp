@@ -22,7 +22,7 @@ int main() {
 		fichas = new int[2 * f];
 		for (int i = 0; i < 2 * f; i++)
 			cin >> fichas[i];
-		cout << (validar(n, f, fichas) ? "true" : "false") << endl;
+		cout << (verificar(n, f, fichas) ? "true" : "false") << endl;
 		return 0;
 		
 	case 3: case 4:

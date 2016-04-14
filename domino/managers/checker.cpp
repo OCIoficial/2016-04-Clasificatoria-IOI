@@ -7,7 +7,7 @@
 using namespace std;
 
 bool fn_cuadrado(int n);
-bool fn_validar(int n, int f, int d[]);
+bool fn_verificar(int n, int f, int d[]);
 int fn_fichas(int n);
 int fn_sum(int n, int f, int d[]);
 bool eval_construir(int n, int k, int f, int d[]);
@@ -84,7 +84,7 @@ int main (int argc, char *argv[]) {
 			ans = false;
 		else
 			return wrong_ans();
-		return ans == fn_validar(n, f, d) ? right_ans() : wrong_ans();
+		return ans == fn_verificar(n, f, d) ? right_ans() : wrong_ans();
 		
 	case 3: case 4:
 		fin >> n >> k >> f;
@@ -112,7 +112,7 @@ bool fn_cuadrado(int n) {
 	return (n-1) % 8 >= 6;
 }
 
-bool fn_validar(int n, int f, int d[]) {
+bool fn_verificar(int n, int f, int d[]) {
 	if (!fn_cuadrado(n))
 		return false;
 	
@@ -160,7 +160,7 @@ int fn_sum(int n, int f, int d[]) {
 }
 
 bool eval_construir(int n, int k, int f, int d[]) {
-	if (!fn_validar(n, f, d) || k != fn_sum(n, f, d)) {
+	if (!fn_verificar(n, f, d) || k != fn_sum(n, f, d)) {
 		return false;
 	}
 	return true;

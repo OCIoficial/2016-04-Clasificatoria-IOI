@@ -13,7 +13,7 @@ bool cuadrado(int n) {
 	return (n-1) % 8 >= 6;
 }
 
-bool validar(int n, int f, int d[]) {
+bool verificar(int n, int f, int d[]) {
 	// Revisa que n es válido
 	if (!cuadrado(n))
 		return false;
