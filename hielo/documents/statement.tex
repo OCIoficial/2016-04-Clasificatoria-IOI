@@ -1,6 +1,7 @@
 \documentclass{oci}
 \usepackage[utf8]{inputenc}
 \usepackage{lipsum}
+\usepackage[spanish]{babel}
 
 \title{La cueva de hielo}
 
@@ -46,22 +47,26 @@ En esta subtarea no es importante el tiempo que toma mover al personaje.
 \begin{itemize}
 	\item \verb+bool posible(int N, bool rocas[100][100], int xi, int yi, int xf, int yf)+
 
-Esta función debe determinar si es posible para el laberinto especificado llevar al personaje desde la posición inicial a la final.
-  Si es posible la función debe retornar \texttt{true}, en caso contrario debe retornar \texttt{false}.
   \begin{itemize}
-    \item \verb+N+: Tamaño de la grilla.
-    \item \verb+rocas+: Arreglo de dos dimensiones especificando las casillas del laberinto que contienen una roca.
+    \item \verb+N+: tamaño de la grilla.
+    \item \verb+rocas+: arreglo de dos dimensiones especificando las casillas del laberinto que contienen una roca.
       Si \verb+rocas[x][y]+ guarda el valor \verb+true+ significa que hay una roca en la casilla $(x,y)$.
       En caso contrario, si \verb+rocas[x][y]+ guarda el valor \verb+true+ significa que la casilla $(x,y)$ está vacía.
       Este arreglo es de tamaño $100\times 100$, pero solo las posiciones correspondientes a las primeras $N\times N$ casillas tienen información relevante.
-    \item \verb+xi+: Coordenada $x$ de la posición inicial.
-    \item \verb+yi+: Coordenada $y$ de la posición inicial.
-    \item \verb+xf+: Coordenada $x$ de la posición final.
-    \item \verb+yf+: Coordenada $y$ de la posición final.
+    \item \verb+xi+: coordenada $x$ de la posición inicial.
+    \item \verb+yi+: coordenada $y$ de la posición inicial.
+    \item \verb+xf+: coordenada $x$ de la posición final.
+    \item \verb+yf+: coordenada $y$ de la posición final.
+    \item \verb+return+:
+      La función debe retornar \verb+true+ si es posible para el laberinto especificado llevar al personaje desde la posición inicial a la final.
+      En caso contrario debe retornar \verb+false+.
   \end{itemize}
 \end{itemize}
 
-Para esta subtarea se probará esta función con varios casos donde $10 \leq N\leq 100$ (50pts).
+\paragraph{Restricciones}
+\begin{itemize}
+\item Para esta subtarea se probará la función con varios casos donde $10 \leq N\leq 100$ (50pts).
+\end{itemize}
 
 \subsection*{Subtarea 2 (50pts)}
 En esta subtarea debe encontrarse el mínimo tiempo en que es posible llevar al personaje desde la posición inicial a la final.
@@ -74,13 +79,16 @@ En esta subtarea debe encontrarse el mínimo tiempo en que es posible llevar al 
   Los parámetros de la función son los mismos que los de \verb+posible+.
 \end{itemize}
 
-Para esta subtarea se probará esta función con varios casos donde $10 \leq N\leq 100$ (50pts).
+\paragraph{Restricciones}
+\begin{itemize}
+\item Para esta subtarea se probará la función con varios casos donde $10 \leq N\leq 100$ (50pts).
+\end{itemize}
 
 \subsection*{Detalles de implementación}
 Debes enviar exactamente un archivo, llamado \verb+hielo.cpp+.
-Este archivo deberá implementar todas las funciones descritas.
-Si solo has implementado una de las funciones la otra debe también estar presente y puedes dejarla vacía.
-El archivo \verb+hielo.cpp+ debe también incluir el header \verb+hielo.h+.
+Este archivo debe contener todas las funciones descritas.
+Si solo has implementado una de las funciones las otras deben también estar presente y puedes dejarlas vacías.
+El archivo \verb+hielo.cpp+ debe incluir el header \verb+hielo.h+.
 
 \subsection*{Grader de Ejemplo}
 Se provee un \emph{grader} junto con algunos archivos de prueba para que puedas testear tu solución.
