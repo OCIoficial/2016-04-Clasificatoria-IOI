@@ -86,7 +86,7 @@ int main (int argc, char *argv[]) {
 			return wrong_ans();
 		return ans == fn_validar(n, f, d) ? right_ans() : wrong_ans();
 		
-	case 3:
+	case 3: case 4:
 		fin >> n >> k >> f;
 		d = new int[2 * f];
 		ftest >> raw_ans;

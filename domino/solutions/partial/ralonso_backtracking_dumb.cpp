@@ -107,10 +107,6 @@ bool backtrack(int n, int k, int d[], int pos, int sidesum, vector<vector<bool> 
 				d[pos + 1] = j;
 				if (backtrack(n, k, d, pos + 2, sidesum + i + j, pieza))
 					return true;
-				d[pos] = j;
-				d[pos + 1] = i;
-				if (backtrack(n, k, d, pos + 2, sidesum + i + j, pieza))
-					return true;
 				pieza[i][j] = false;
 			}
 		}
