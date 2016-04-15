@@ -95,8 +95,10 @@ En esta subtarea no importa la suma de los valores de cada lado, sólo se pide d
   \item \verb+return+: la función debe retornar \verb+true+ si es posible construir un cuadrado válido o \verb+false+ en caso contrario.
  \end{itemize}
 \end{itemize}
+\vspace{-1em}
 
 {\bf Restricciones}
+\vspace{-1.2em}
 \begin{itemize}
 \item Para esta subtarea se probará la función \verb+cuadrado+ con varios casos donde $0< n\leq 1000$ (25pts).
 \end{itemize}
@@ -117,7 +119,8 @@ En esta subtarea para el $n$-dominó entregado siempre será posible formar un c
  \end{itemize}
 \end{itemize}
 
-\paragraph{Restricciones}
+{\bf Restricciones}
+\vspace{-.6em}
 \begin{itemize}
 \item Para esta subtarea se probará la función \verb+verificar+ con varios casos donde $0 < n\leq 1000$ (35pts).
 \end{itemize}
@@ -138,19 +141,19 @@ Su contenido será revisado sólo en el caso de que la función retorne \verb+tr
   \item \verb+return+: la función debe retornar \verb+true+ si es posible formar un cuadrado $(n,k)$ o \verb+false+ en caso contrario.
  \end{itemize}
 \end{itemize}
-
-\paragraph{Restricciones}
+{\bf Restricciones}
+\vspace{-0.6em}
 \begin{itemize}
 \item Para la subtarea 3 se probará la función \verb+verificar+ con varios casos donde $n= 7$ (20pts).
 \item Para la subtarea 4 se probará la función \verb+verificar+ con varios casos donde $7 < n\leq 1000$ (20pts).
 \end{itemize}
 
-\subsection*{Convención sobre el formato del arreglo \emph{fichas}}
+\subsection*{Formato del arreglo \emph{fichas}}
 La función \verb+verificar+ recibe como parámetro un arreglo de enteros \verb+fichas+ donde se especifica un cuadrado construido con las fichas de un $n$-dominó.
 De la misma forma \verb+construir+ debe llenar el arreglo \verb+fichas+ para especificar el cuadrado que construye.
 A continuación se detalla la forma en que un cuadrado es especificado en el arreglo \verb+fichas+.
 
-Si $f$ es la cantidad de fichas que conforman $n$-dominó el arreglo \verb+fichas+ es de tamaño $2\times f$.
+Si $f$ es la cantidad de fichas que conforman un $n$-dominó, el arreglo \verb+fichas+ es de tamaño $2\times f$.
 Por ejemplo, un cuadrado construido con un $7$-dominó debe ser especificado en un arreglo de tamaño 56, pues un $7$-dominó está conformado por 28 fichas.
 En el arreglo una ficha es almacenada en dos posiciones consecutivas.
 La posición 0 y la 1 corresponden a la primera ficha, la 2 y la 3 a la segunda ficha y así hasta la última ficha que corresponde a las posiciones $2\times f-2$ y $2\times f-1$ en el arreglo.
