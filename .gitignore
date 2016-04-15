@@ -34,3 +34,4 @@ TAGS
 checker
 *fdb_latexmk
 *.pdf
+*.md5
