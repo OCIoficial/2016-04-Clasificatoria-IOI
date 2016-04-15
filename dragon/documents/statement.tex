@@ -8,9 +8,14 @@
 \usepackage{amssymb}
 \usepackage{float}
 \usepackage{tikz}
+\usepackage{color}
+\usepackage{amsmath}
 \usetikzlibrary{external}
 \tikzexternalize[prefix=tikz/]
 \usepackage{wrapfig}
+
+\renewcommand{\u}{{\color{red}\texttt{+}}}
+\renewcommand{\d}{{\color{blue}\texttt{-}}}
 
 \def\NN{\mathbb{N}}
 \def\ZZ{\mathbb{Z}}
@@ -23,6 +28,186 @@
 
 \begin{document}
 \maketitle
+Nuestro héroe Olon-sonkú debe llegar al planeta de Jorgesama para aumentar su poder.
+Si supiera la posición del planeta podría usar la teletransportación. Lamentablemente Olon-sokú no sabe exactamente dónde está el planeta y sólo sabe que este se encuentra en algún punto siguiendo el \emph{camino del dragón}, un camino infinito de intrincada estructura. 
+% Olon-sokú no sabe exactamente dónde está el planeta y sólo sabe que 
+%este se encuentra en algún punto del \emph{camino del dragón}, un camino infinito de intrincada estructura. 
+Por fortuna %para Olon-sokú, que si bien tiene gran fuerza su inteligencia es bastante escasa ****, 
+su astuta amiga Bulnelman lleva años estudiando este camino, y ha descubierto que puede ser recorrido de manera simple mediante \emph{secuencias del dragón} que son movimientos que se deben seguir para avanzar por el camino infinito.
+
+Para describir una \emph{secuencia del dragón} denotaremos con una ``$A$'' la acción de avanzar un paso, con una ``$R$'' la acción de rotar $90^{\circ}$ grados a la derecha y con una ``$L$'' la acción de rotar $90^{\circ}$ a la izquierda.
+Describiremos las secuencias del dragón usando secuencias de estas letras. No obstante, no cualquier secuencia corresponde a una secuencia del dragón válida.
+Las secuencias válidas son generadas por un sistema de \emph{reemplazos} que usa dos símbolos especiales, ``$\u$'' y ``$\d$'', y que siguen las siguientes reglas.
+Un ``$\u$'' se debe reemplazar por la secuencia ``$\u\ R\ \d\ A\ R$'' y un ``$\d$'' se debe reemplazar por la secuencia ``$L\ A\ \u\ L\ \d$'', lo que se muestra en el siguiente esquema.
+\begin{center}
+\scalebox{0.8}
+{ 
+\input{reglas.pspdftex}}
+\end{center}
+
+Para generar secuencias del dragón hay que comenzar con la secuencia ``$A\ \u$'' y aplicar iterativamente las reglas de reemplazo.
+A continuación se muestra un esquema con la aplicación de las reglas en tres iteraciones consecutivas iniciando en la secuencia ``$A\ \u$''.
+\begin{center}
+\scalebox{0.8}
+{ 
+\input{aplicacion.pspdftex}}
+\end{center}
+
+Comenzando con ``$A\ \u$'', en el primer paso el símbolo ``$\u$'' es reemplazado por ``$\u\ R\ \d\ A\ R$'' resultando la secuencia ``$A\ \u\ R\ \d\ A\ R$'' que se ve en el nivel 1 en el diagrama.
+A continuación en esa secuencia se reemplazan ``$\u$'' por ``$\u\ R\ \d\ A\ R$'' y ``$\d$'' por ``$L\ A\ \u\ L\ \d$'' dando como resultado la secuencia 
+``$A\ \u\ R\ \d\ A\ R\ R\ L\ A\ \u\ L\ \d\ A\ R$'' en el nivel 2 del diagrama.
+Después de la tercera iteración se obtiene la secuencia que se ve en el nivel 3 del diagrama y que corresponde a
+$$\text{``}A\ \u\ R\ \d\ A\ R\ R\ L\ A\ \u\ L\ \d\ A\ R\ R\ L\ A\ \u\ R\ \d\ A\ R\ L\ L\ A\ \u\ L\ \d\ A\ R\text{''}.$$
+
+Para generar finalmente las secuencias del dragón, debemos simplemente eliminar los ``$\u$'' y ``$\d$'' de las secuencias generadas en el anterior proceso.
+El siguiente diagrama muestra las secuencias del dragón generadas a partir de las primeras tres iteraciones.
+\begin{center}
+\scalebox{0.8}
+{ 
+\input{caminos.pspdftex}}
+\end{center}
+
+Notar que después de cada iteración la secuencia resultante es una extensión de la anterior.
+Esto significa que después de cada iteración nos acercamos más al camino del dragón real. Como lo notó Bulnelman, si siguiéramos con el proceso hasta el infinito obtendríamos una secuencia que define la forma de avanzar por el camino del dragón completo.
+
+Bulnelman tiene el problema de Olon-soukú casi resuelto, pues sus investigaciones le han permitido determinar que el planeta de Jorgesama se encuentra avanzando exactamente $N$ pasos en el camino del dragón. Lo único que necesitamos ahora es saber dónde quedaría exactamente una persona que avanzara $N$ pasos del camino, y es aquí donde tu ayuda se hace imprescindible.
+
+%Cada una de las secuencias del dragón corresponde a una serie de acciones que hay que hacer para recorrer el camino correspondiente.
+%Para determinar la posición en que queda Olon-sonkú después de realizar las acciones supondremos que siempre comienza en la posición $(0,0)$ mirando hacia el norte.
+
+Supondremos que para recorrer el camino del dragón se comienza siempre en la posición $(0,0)$ mirando hacia el norte.
+A continuación se muestra un ejemplo donde se ejecutan las acciones para la secuencia ``$A\ R\ A\ R\ R\ L\ A\ L\ A\ R\ R\ L\ A\ R\ A\ R\ L\ L\ A\ L\ A\ R$'' junto a una figura de ilustración:
+% \newpage
+\\
+
+\begin{minipage}{0.45\textwidth}
+\begin{itemize}
+	{\footnotesize \item Comenzamos en $(0,0)$ mirando al norte
+	\item $A$:  Avanzar, llega a $(0,1)$ mirando todavía hacia el norte.
+	\item $R\ A$: Rotar a la derecha y avanzar, llega a $(1,1)$ y mirando hacia el este.
+	\item $R\ R\ L\ A$: Rotar dos veces a la derecha, una vez a la izquierda y luego avanzar, llega a $(1,0)$ y mirando hacia sur.
+	\item $L\ A$: Llega a $(2,0)$ mirando hacia el este.
+	\item $R\ R\ L\ A$: Llega a $(2,-1)$ mirando hacia el sur.
+	\item $R\ A$: Llega a $(1,-1)$ mirando hacia el oeste.
+	\item $R\ L\ L\ A$: Llega a $(1,-2)$ mirando hacia el sur.
+	\item $L\ A\ R$:  Termina en $(2,-2)$ mirando hacia el sur.}
+\end{itemize}
+\end{minipage}
+~%
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+		\begin{tikzpicture}
+	% \begin{scope}[scale = 0.6, shift={(-15,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 0.6, shift={(-12,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1) --(1,1);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 0.6, shift={(-9,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 0.6, shift={(-6,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 0.6, shift={(-3,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 0.6, shift={(0,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 0.6, shift={(3,0)},rotate=0]
+	% \draw[thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1)--(1,-2);
+	% \draw[fill = black] (0,0) circle (0.1);
+	% \end{scope}
+	% \begin{scope}[scale = 1, shift={(0,0)},rotate=0]
+    \draw[step=1, lightgray, very thin] (2.5,2.5) grid (-2.5,-2.5);
+    \foreach \i in {-2,-1,1,2}
+       \draw (\i, -1pt) -- (\i, 1pt) node[anchor=north, scale=0.7]{$\i$};
+    \foreach \i in {-2,-1,1,2}
+       \draw (-1pt,\i) -- (1pt,\i) node[anchor=east, scale=0.7]{$\i$};
+  \draw[thin] (0,-2.5) -- (0,2.5);
+  \draw[thin] (-2.5,0) -- (2.5, 0);
+	\draw[very thick,red] (0,0) --(0,1) --(1,1) --(1,0) -- (2,0) --(2,-1) -- (1,-1)--(1,-2) -- (2,-2);
+	% \draw[fill = black] (0,0) circle (0.1);
+	%\end{scope}
+	\end{tikzpicture}
+\end{center}
+\end{minipage}
+\\
+
+Nota que en el recorrido anteriormente descrito se avanzaron $N=8$ pasos. Esencialmente para una secuencia del dragón, la cantidad de pasos que se avanza equivale a la cantidad de veces que la letra ``$A$'' aparece en la secuencia.
+Nota además que para seguir $N$ pasos del camino del dragón, se debe considerar una secuencia con al menos $N$ letras ``$A$''. 
+Por ejemplo, para avanzar $5$ pasos, hay que considerar la secuencia ``$A\ R\ A\ R\ R\ L\ A\ L\ A\ R\ R\ L\ A\ R\ A\ R\ L\ L\ A\ L\ A\ R$'' y ejecutar
+las primeras 5 acciones avanzar, lo que nos dejaría en la posición $(2,-1)$.
+Si tienes curiosidad acerca de la forma del mítico camino del dragón, en la figura de la siguiente página se muestra una porción más grande del camino, una en donde se han avanzado $2^{12}-1=$\ 4.095 pasos.
+%Esto dejaría a Olon-sonkú en la posición $(2,-1)$.
+
+%Diremos que un recorrido del dragón tiene largo $N$ si se ejecuta la acción avanzar $N$ veces.
+%Por ejemplo, el recorrido descrito anteriormente tiene largo $N = 8$.
+%Notar que para hacer un recorrido de largo $N$ hay que considerar una secuencia del dragón que tenga al menos $N$ acciones avanzar.
+%Por ejemplo si se quiere hacer un recorrido de largo $N=5$ hay que considerar la secuencia $ARARRLALARRLARARLLALAR$ y ejecutar
+%las primeras 5 acciones avanzar.
+%Esto dejaría a Olon-sonkú en la posición $(2,-1)$.
+
+Olon-sokú ya no puede esperar para teletrasportarse done Jorgesama, sólo necesita las coordenadas. Por su parte Bulnelman ya sabe la cantidad de pasos que habría que avanzar en el camino del dragón para llegar al planeta. Ahora sólo falta tu parte.
+%Supón que Bulnelman sabe que el planeta de Jorgesama se encuentra al final del recorrido del dragón de largo $N$.
+%?`Puedes ayudarnos a saber cual es la posición exacta del planeta del gran Jorgesama?
+
+
+\begin{inputDescription}
+La entrada consiste en una línea con un único entero positivo $N$, que corresponde a la cantidad de pasos que hay que avanzar en el camino del dragón para llegar al planeta de Jorgesama.
+%Tu programa debe calcular las coordenadas del final del recorrido del dragón de largo $N$.
+\end{inputDescription}
+
+\begin{outputDescription}
+Debes imprimir una única línea con dos enteros $x$ e $y$ separados por un espacio.
+Estos enteros corresponden a las coordenadas del planeta del gran Jorgesama.
+\end{outputDescription}
+
+\begin{scoreDescription}
+\score{10} Se probarán varios casos donde $1 \leq N \leq 8$.
+\score{20} Se probarán varios casos donde $1 \leq N \leq 100$.
+\score{40} Se probarán varios casos donde $1 \leq N \leq 10^5$.
+\score{30} Se probarán varios casos donde $1 \leq N \leq 10^{15}$. 
+\\
+\\
+{\bf Nota:} en la última subtarea el entero $N$ debe ser leído en una variable de tipo long long.
+\end{scoreDescription}
+
+\begin{sampleDescription}
+\sampleIO{sample1}
+\sampleIO{sample2}
+\sampleIO{sample3}
+\sampleIO{sample4}
+\sampleIO{sample5}
+\sampleIO{sample6}
+\end{sampleDescription}
+
+
+%\begin{wrapfigure}{r}{0.9\textwidth}
+ \begin{figure*}[h!]
+%  \centering
+	 \begin{center}
+			\include{dragoncito}
+		\caption{Primeros 4.095 
+		%$2^{12}-1$ 
+		pasos del camino del dragón alcanzando la coordenada (XXX,YYY)}
+	 \end{center}
+ \end{figure*}
+%\end{wrapfigure}
+
+
+\end{document}
+
+************************
+
+\maketitle
 Nuestro héroe Olon-sonkú debe recorrer el camino del dragón para llegar al planeta de Jorgesama y aumentar su poder de pelea. Desgraciadamente, el camino del dragón no es en línea recta, sino que es un camino infinito conocido como la curva del dragón de Highway.
 
 
@@ -33,38 +218,92 @@ Es por esto que se encuentra en un gran problema pues para lograr su cometido de
 Por fortuna su amiga Bulnelman planea ayudarlo a realizar esta tarea.
 Bulnelman estudió detenidamente el camino del dragón y descubrió que este puede ser descrito de manera simple.
 
+<<<<<<< HEAD
+
+%\begin{wrapfigure}{r}{0.5\textwidth}
+%% \begin{figure}[b]
+%  \centering
+%	% \begin{center}
+%			\include{dragoncito}
+%		\caption{Primeros $2^{12}-1$ pasos de la curva del dragón}
+%	% \end{center}
+%% \end{figure}
+%\end{wrapfigure}
+=======
 \begin{wrapfigure}{r}{0.5\textwidth}
   \centering
   \include{dragoncito}
   \caption{Primeros $2^{12}-1$ pasos de la curva del dragón}
 \end{wrapfigure}
+>>>>>>> effc8ca3ec0ba43ce2f1cb2c0b6d10ed841ac587
 
 El verdadero camino del dragón es un camino infinito, pero a continuación hablaremos de varios caminos finitos que llamaremos también caminos del dragón.
 Para describir un camino del dragón se denotará con una $A$ la acción de avanzar un paso, con una $R$ la acción de rotar $90^{\circ}$ grados a la derecha y con una $L$ la acción de rotar $90^{\circ}$ a la izquierda.
 Un camino del dragón corresponde a una secuencia de estos símbolos que representan las acciones que hay que realizar para recorrerlo.
 No obstante, no cualquier secuencia formada con estas letras corresponde a un camino del dragón válido.
-Las secuencias válidas son generadas por un sistema de reescritura.
-Llamaremos secuencias del dragón a las secuencias generadas por este sistema.
+Las secuencias válidas son generadas por un sistema de \emph{reemplazos} que usa dos símbolos especiales, ``$\u$''y ``$\d$'', y que siguen las siguientes reglas.
+Un ``$\u$'' se debe reemplazar por la secuencia ``$\u R\d AR$'' y un ``$\d$'' se debe reemplazar por la secuencia ``$LA\u L\d$'', lo que se muestra en el siguiente esquema.
+%de símbolos ``$\u$'' y ``$\d$'' como explicamos a continuación.
+%%Llamaremos secuencias del dragón a las secuencias generadas por este sistema.
+\begin{center}
+\scalebox{0.8}
+{ 
+\input{reglas.pspdftex}}
+\end{center}
 
-Un sistema de reescritura consiste en una serie de reglas para transformar una secuencia.
-Cada regla contiene un símbolo a la izquierda y una secuencia a la derecha.
-Aplicar una regla significa que cada aparición del símbolo de la izquierda debe ser reemplazada por la secuencia de la derecha.
-Las reglas para generar secuencias del dragón usan dos símbolos auxiliares $a$ y $b$.
-Estos símbolos no representan acciones y solo son usados para generar las secuencias.
-Las reglas correspondientes al camino del dragón son las siguientes.
-$$a \rightarrow aRbAR \ \ \ \ \ \ \ \ \ \   b \rightarrow LAaLb$$
-Para generar secuencias del dragón hay que partir con la secuencia $Aa$ y aplicar iterativamente estas reglas de reescritura.
-A continuación se muestra la aplicación de las reglas en tres iteraciones consecutivas.
-En cada paso ambas reglas son aplicadas simultáneamente.
-$$Aa \rightarrow AaRbAR \rightarrow AaRbARRLAaLbAR \rightarrow AaRbARRLAaLbARRLAaRbARLLAaLbAR$$
-En el primer paso el símbolo $a$ es reemplazado en $Aa$ por la secuencia $aRbAR$ resultando $AaRbAR$.
-A continuación se reemplaza simultáneamente la $a$ por $aRbAR$ y la $b$ por $LAaLB$ dando como resultado la secuencia $AaRbARRLAaLbAR$.
-Finalmente después de la tercera iteración se obtiene la secuencia $AaRbARRLAaLbARRLAaRbARLLAaLbAR$.
+%Un sistema de reescritura consiste en una serie de reglas para transformar una secuencia.
+%Cada regla contiene un símbolo a la izquierda y una secuencia a la derecha.
+%Aplicar una regla significa que cada aparición del símbolo de la izquierda debe ser reemplazada por la secuencia de la derecha.
+%Las reglas para generar secuencias del dragón usan dos símbolos auxiliares $a$ y $b$.
+%Estos símbolos no representan acciones y solo son usados para generar las secuencias.
+%Las reglas correspondientes al camino del dragón son las siguientes.
+%$$a \rightarrow aRbAR \ \ \ \ \ \ \ \ \ \   b \rightarrow LAaLb$$
+
+Para generar secuencias del dragón hay que partir con la secuencia ``$A\u$'' y aplicar iterativamente las reglas de reemplazo.
+A continuación se muestra un esquema con la aplicación de las reglas en tres iteraciones consecutivas iniciando en la secuencia ``$A\u$''.
+
+\begin{center}
+\scalebox{0.8}
+{ 
+\input{aplicacion.pspdftex}}
+\end{center}
+
+Comenzando con ``$A\u$'', en el primer paso el símbolo ``$\u$'' es reemplazado por ``$\u R\d AR$'' resultando la secuencia ``$A\u R\d AR$'' que se ve en el nivel 1 en el diagrama.
+A continuación en esa secuencia se reemplazan ``$\u$'' por ``$\u R\d AR$'' y ``$\d$'' por ``$LA\u L\d$'' dando como resultado la secuencia ``$A\u R\d ARRLA\u L\d AR$'' en el nivel 2 del diagrama.
+Finalmente después de la tercera iteración se obtiene la secuencia 
+$$\text{``}A\u R\d ARRLA\u L\d ARRLA\u R\d ARLLA\u L\d AR\text{''}$$
+que se ve en el nivel 3 del diagrama.
+
+%En cada paso ambas reglas son aplicadas simultáneamente.
+%$$Aa \rightarrow AaRbAR \rightarrow AaRbARRLAaLbAR \rightarrow AaRbARRLAaLbARRLAaRbARLLAaLbAR$$
+%En el primer paso el símbolo $a$ es reemplazado en $Aa$ por la secuencia $aRbAR$ resultando $AaRbAR$.
+%A continuación se reemplaza simultáneamente la $a$ por $aRbAR$ y la $b$ por $LAaLB$ dando como resultado la secuencia $AaRbARRLAaLbAR$.
+%Finalmente después de la tercera iteración se obtiene la secuencia $AaRbARRLAaLbARRLAaRbARLLAaLbAR$.
+
+
+%Notar que después de cada iteración la secuencia resultante es una extensión de la anterior.
+%Esto significa que después de cada iteración la secuencia resultante se acerca más al camino del dragón real.
+
+%Cada una de las secuencias generadas en el proceso da origen a una secuencia del dragón que corresponde a la secuencia generada eliminando las ocurrencias de $a$ y $b$.
+%Por ejemplo, las secuencias $A$, $ARAR$, $ARARRLALAR$ y $ARARRLALARRLARARLLALAR$ son las secuencias del dragón originadas a partir de las primeras tres iteraciones.
+
+Para generar finalmente las secuencias del dragón, debemos simplemente eliminar los ``$\u$'' y ``$\d$'' de las secuencias generadas en el anterior proceso.
+El siguiente diagrama muestra las secuencias del dragón generadas a partir de las primeras tres iteraciones.
+
+
+\begin{center}
+\scalebox{0.8}
+{ 
+\input{caminos.pspdftex}}
+\end{center}
+
 Notar que después de cada iteración la secuencia resultante es una extensión de la anterior.
-Esto significa que después de cada iteración la secuencia resultante se acerca más al camino del dragón real.
+Esto significa que después de cada iteración nos acercamos más al camino del dragón real. Si siguiéramos con el proceso hasta el infinito obtendríamos una secuencia que define el camino del dragon completo.
 
-Cada una de las secuencias generadas en el proceso da origen a una secuencia del dragón que corresponde a la secuencia generada eliminando las ocurrencias de $a$ y $b$.
-Por ejemplo, las secuencias $A$, $ARAR$, $ARARRLALAR$ y $ARARRLALARRLARARLLALAR$ son las secuencias del dragón originadas a partir de las primeras tres iteraciones.
+
+\end{document}
+
+
 
 Cada una de las secuencias del dragón corresponde a una serie de acciones que hay que hacer para recorrer el camino correspondiente.
 Para determinar la posición en que queda Olon-sonkú después de realizar las acciones supondremos que siempre comienza en la posición $(0,0)$ mirando hacia el norte.
