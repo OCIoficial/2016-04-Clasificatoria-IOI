@@ -14,6 +14,7 @@ bool eval_construir(int n, int k, int f, int d[]);
 
 int wrong_ans() {
 	cout << "0.0\n";
+
 	return 0;
 }
 
