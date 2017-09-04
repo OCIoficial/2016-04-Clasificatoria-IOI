@@ -34,3 +34,7 @@ TAGS
 checker
 *fdb_latexmk
 *.md5
+oneside.pdf
+twoside.pdf
+titlepage.pdf
+statement.pdf
